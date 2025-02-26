@@ -1,0 +1,15 @@
+$primary-color: #2967FF;;
+$secondary-color: #2ecc71;
+$error-color: #e74c3c;
+$background-color: #ecf0f1;
+$text-color: #2D2D2F;
+$white: #fff;
+
+:export {
+    primaryColor: $primary-color;
+    secondaryColor: $secondary-color;
+    errorColor: $error-color;
+    backgroundColor: $background-color;
+    textColor: $text-color;
+    white: $white;
+}

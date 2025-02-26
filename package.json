@@ -1,0 +1,49 @@
+{
+    "name": "react-redux-orm-app",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@mui/material": "^6.4.5",
+        "@reduxjs/toolkit": "^1.9.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-redux": "^8.0.5",
+        "react-router-dom": "^7.2.0",
+        "react-scripts": "5.0.1",
+        "react-time-picker": "^7.0.0",
+        "redux": "^4.2.0",
+        "redux-orm": "^0.14.1",
+        "sass": "^1.85.1"
+    },
+    "devDependencies": {
+        "typescript": "^4.9.3",
+        "webpack-cli": "^6.0.1"
+    },
+    "scripts": {
+        "start:dev": "npx webpack serve --config webpack.config.js",
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
