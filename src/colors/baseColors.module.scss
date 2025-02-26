@@ -3,6 +3,7 @@ $secondary-color: #2ecc71;
 $error-color: #e74c3c;
 $background-color: #ecf0f1;
 $text-color: #2D2D2F;
+$text-color-light: #8D8D8E;
 $link-color: #727280;
 $white: #fff;
 $border-color: #F0F4FB;
@@ -18,4 +19,5 @@ $dark-border-color: #727280;
     linkColor: $link-color;
     borderColor: $border-color;
     darkBorderColor: $dark-border-color;
+    textColorLight: $text-color-light;
 }

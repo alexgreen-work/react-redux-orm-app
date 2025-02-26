@@ -1,0 +1,82 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.footer {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 50px;
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+    &__left {
+        display: flex;
+        &-item {
+
+        }
+        &-react {
+            font-weight: 700;
+            font-family: Montserrat;
+            font-size: 40px;
+            line-height: 50px;
+        }
+    }
+    &__right {
+        display: flex;
+        &__socials {
+            display: flex;
+            flex-direction: column;
+        }
+    }   
+    &__copyright {
+        display: flex;
+        justify-content: center;
+        margin-top: 61px;
+        &-item {
+            &>a {
+                color: colors.$text-color-light
+            }
+            &:first-child {
+                margin-left: 0;
+            }
+            margin-left: 20px;
+            color: colors.$text-color-light
+        }
+    }
+}
+
+.right {
+    &__socials {
+        margin-right: 30px;
+    }
+}
+
+.socials {
+    &__header {
+        margin-bottom: 10px;
+    }
+    &__icons {
+        display: flex;
+        &-icon {
+            &:last-child {
+                margin-right: 0;
+            }
+            display: flex;
+            margin-right: 16px;
+        }
+    }
+}
+
+.apps {
+    &__header {
+        margin-bottom: 10px;
+    }
+    &__buttons {
+        display: flex;
+        &-button {
+            &:last-child {
+                margin-right: 0;
+            }
+            margin-right: 20px;
+        }
+    }
+}
