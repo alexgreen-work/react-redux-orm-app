@@ -13,7 +13,7 @@ interface PageWithBannerSideProps {
 const PageWithBannerSide: React.FC<PageWithBannerSideProps> = ({ children }) => (
     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '100vh' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0 50px'}}>
                 <Header />
                 {children}
             </Box>

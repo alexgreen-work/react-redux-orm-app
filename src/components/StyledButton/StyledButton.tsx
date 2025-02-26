@@ -6,18 +6,18 @@ import styles from "./StyledButton.module.scss";
 interface StyledButtonProps {
     bgcolor?: string;
     bordercolor?: string;
-    children?: string;
-    buttonProps?: ButtonProps;
+    color?: string;
+    children?: any;
   }
 
-const StyledButton: React.FC<StyledButtonProps> = ({ bgcolor, bordercolor, children, buttonProps }) => {
+const StyledButton: React.FC<StyledButtonProps & ButtonProps> = ({ bgcolor, bordercolor, children, color, ...buttonProps }) => {
     return (
       <Button
         variant="contained"
         sx={{
           textTransform: 'none',
           backgroundColor: bgcolor || colors.primaryColor,
-          color: colors.white,
+          color: color ? color : colors.white,
           boxShadow: 'none',
           border: `1px solid ${bordercolor || colors.primaryColor}`,
           borderRadius: '20px',

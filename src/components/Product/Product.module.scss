@@ -1,0 +1,15 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.product {
+    &__title {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 30px;
+    }
+    &__back {
+        margin-bottom: 42px;
+        &>a {
+            color: colors.$primary-color
+        }
+    }
+}

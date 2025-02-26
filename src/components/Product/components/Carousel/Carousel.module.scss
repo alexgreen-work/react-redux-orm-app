@@ -1,0 +1,14 @@
+.carousel{
+    &__main {
+        &>img {
+            max-width: 400px;
+        }
+    }
+    &__items{
+        &-item {
+            &>img {
+                max-width: 80px;
+            }
+        }
+    }
+}

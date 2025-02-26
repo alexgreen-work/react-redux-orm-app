@@ -1,0 +1,31 @@
+.card {
+    &__price {
+        font-size: 16px;
+        &-price {
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 38px;
+            margin-right: 4px;
+        }
+    }
+    &__variation {
+        margin-top: 10px;
+        margin-bottom: 16px;
+    }
+    &__category {
+        margin-top: 10px;
+    }
+}
+
+.variation {
+    &__title {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22px;
+        margin-bottom: 10px;
+    }
+}
+
+.category {
+    margin-top: 16px;
+}
