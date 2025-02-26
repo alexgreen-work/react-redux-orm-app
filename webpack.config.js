@@ -53,6 +53,18 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /.(jpg|jpeg|gif|png|ico|svg|pdf)$/,
+        type: "asset",
+        generator: {
+          filename: 'img/[name].[contenthash:6].[ext]'
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 1024
+          }
+        }
+      },
     ],
   },
   resolve: {

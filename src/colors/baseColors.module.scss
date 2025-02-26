@@ -1,9 +1,11 @@
-$primary-color: #2967FF;;
+$primary-color: #2967FF;
 $secondary-color: #2ecc71;
 $error-color: #e74c3c;
 $background-color: #ecf0f1;
 $text-color: #2D2D2F;
+$link-color: #727280;
 $white: #fff;
+$border-color: #F0F4FB;
 
 :export {
     primaryColor: $primary-color;
@@ -12,4 +14,6 @@ $white: #fff;
     backgroundColor: $background-color;
     textColor: $text-color;
     white: $white;
+    linkColor: $link-color;
+    borderColor: $border-color;
 }

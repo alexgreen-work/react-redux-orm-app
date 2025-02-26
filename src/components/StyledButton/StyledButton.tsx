@@ -1,6 +1,7 @@
 import { Button, ButtonProps } from "@mui/material";
 import React from "react";
 import colors from '../../colors/baseColors.module.scss'
+import styles from "./StyledButton.module.scss";
 
 interface StyledButtonProps {
     bgcolor?: string;
@@ -19,7 +20,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({ bgcolor, bordercolor, child
           boxShadow: 'none',
           border: `1px solid ${bordercolor || colors.primaryColor}`,
           borderRadius: '20px',
-          padding: '10px 20px',
+          padding: '10px 14px',
           fontSize: '16px',
           '&:hover': {
             boxShadow: 'none',
