@@ -6,10 +6,9 @@ import { css, cx } from "@emotion/css";
 import { searchIcon } from "../../../../icons";
 
 interface SearchBarProps {
-    textFieldProps?: TextFieldProps;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ textFieldProps }) => {
+const SearchBar: React.FC<SearchBarProps> = ({  }) => {
     return (
         <Paper
             component="form"
@@ -21,7 +20,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ textFieldProps }) => {
                 inputProps={{ 'aria-label': 'Поиск бренда, товара, категории...' }}
             />
             <Box>
-                <IconButton color="primary" aria-label="directions">
+                <IconButton color="primary" aria-label="directions" sx={{width: 94, borderRadius: 41, background: colors.borderColor}}>
                     <Icon >
                         <Box sx={{width: "100%", height: "100%", display: "flex", alignItems: "center"}}>
                         <img src={searchIcon} />

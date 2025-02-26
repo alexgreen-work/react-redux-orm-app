@@ -1,0 +1,40 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.header {
+    display: flex;
+    padding: 20px 50px;
+    justify-content: space-between;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        &-item {
+            &:first-child {
+                margin-left: 0;
+            }
+
+            margin-left: 25px;
+        }
+
+        &-react > a {
+            font-weight: 700;
+            font-size: 37px;
+            line-height: 43.44px;
+            color: colors.$text-color;
+        }
+
+        &-history {}
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+
+        &-item {
+            &:first-child {
+                margin-left: 0;
+            }
+
+            margin-left: 20px;
+        }
+    }
+}

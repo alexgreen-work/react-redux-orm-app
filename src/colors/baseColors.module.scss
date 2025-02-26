@@ -6,6 +6,7 @@ $text-color: #2D2D2F;
 $link-color: #727280;
 $white: #fff;
 $border-color: #F0F4FB;
+$dark-border-color: #727280;
 
 :export {
     primaryColor: $primary-color;
@@ -16,4 +17,5 @@ $border-color: #F0F4FB;
     white: $white;
     linkColor: $link-color;
     borderColor: $border-color;
+    darkBorderColor: $dark-border-color;
 }
