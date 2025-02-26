@@ -11,6 +11,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { fetchEntities } from './api';
 import { useDispatch } from 'react-redux';
+import PageWithBannerSide from './pages/PageWithBannerSide';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,11 +27,11 @@ const App: React.FC = () => {
         const categories = await fetchEntities('Categories', {
           sort: ['name', 'ASC'],
         });
-        console.log({products})
+        console.log({ products })
         const variations = await fetchEntities('ProductVariations', {
           sort: ['price', 'ASC'],
           filter: {
-            product_id: products.map((product)=>product.id)
+            product_id: products.map((product) => product.id)
           }
         });
         dispatch({
@@ -47,18 +48,22 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="app-container">
-        <Header />
+        {/* <Header /> */}
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<ProductListPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<OrderCheckoutPage />} />
-            <Route path="/orders" element={<OrderHistoryPage />} />
-            <Route path="/orders/:id" element={<OrderDetailsPage />} />
+            <Route path="/" element={<PageWithBannerSide><ProductListPage /></PageWithBannerSide>} />
+            <Route path="/product/:id" element={<PageWithBannerSide><ProductPage /></PageWithBannerSide>} />
+            <Route path="/cart" element={
+              <PageWithBannerSide>
+                <CartPage />
+              </PageWithBannerSide>
+            } />
+            <Route path="/checkout" element={<PageWithBannerSide><OrderCheckoutPage /></PageWithBannerSide>} />
+            <Route path="/orders" element={<PageWithBannerSide><OrderHistoryPage /></PageWithBannerSide>} />
+            <Route path="/orders/:id" element={<PageWithBannerSide><OrderDetailsPage /></PageWithBannerSide>} />
           </Routes>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

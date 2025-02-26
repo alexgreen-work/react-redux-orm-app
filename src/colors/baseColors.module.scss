@@ -8,6 +8,8 @@ $link-color: #727280;
 $white: #fff;
 $border-color: #F0F4FB;
 $dark-border-color: #727280;
+$pink: #FF2D87;
+$footer-color: #F8F8F8;
 
 :export {
     primaryColor: $primary-color;
@@ -20,4 +22,6 @@ $dark-border-color: #727280;
     borderColor: $border-color;
     darkBorderColor: $dark-border-color;
     textColorLight: $text-color-light;
+    pink: $pink;
+    footer-color: $footer-color;
 }

@@ -1,0 +1,17 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+
+.column {
+    min-height: 75vh;
+    max-width: 351px;
+    width: 100%;
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid colors.$border-color;
+    &__banner {
+        &:last-child {
+            margin-bottom: 0;
+        }
+        margin-bottom: 30px;
+    }
+}

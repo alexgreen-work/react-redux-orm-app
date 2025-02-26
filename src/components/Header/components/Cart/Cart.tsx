@@ -7,6 +7,7 @@ import { cartIcon, searchIcon } from "../../../../icons";
 import avatarImage from "../../../../images/avatar.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
+import { Link } from "react-router-dom";
 
 interface CartProps {
 
@@ -15,10 +16,11 @@ interface CartProps {
 const Cart: React.FC<CartProps> = ({ ...avatarProps }) => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     return (
-        <Box sx={{position: "relative", display: "flex", justifyContent: "center", alignItems: "center", width: 50, height: 50, borderRadius: "50%", border: `1px solid ${colors.darkBorderColor}`}}>
-            <img alt="avatar" src={cartIcon} className={styles.cart}/>
-            <Box className={styles.cart__length}>{cartItems.length}</Box>
-        </Box>
+        <Link to="/cart">
+            <Box sx={{ position: "relative", display: "flex", justifyContent: "center", alignItems: "center", width: 50, height: 50, borderRadius: "50%", border: `1px solid ${colors.darkBorderColor}` }}>
+                <img alt="avatar" src={cartIcon} className={styles.cart} />
+                <Box className={styles.cart__length}>{cartItems.length}</Box>
+            </Box></Link>
     );
 }
 
