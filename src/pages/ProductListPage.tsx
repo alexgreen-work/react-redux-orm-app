@@ -100,9 +100,9 @@ const ProductListPage: React.FC = () => {
       <h3 className={styles.pageName}>Категории товаров</h3>
       {/* Секция выбора категории */}
       <div className={styles.badgesSection} style={{ marginBottom: '16px' }}>
-        <Badge content="Все категории" onClick={() => setSelectedCategory(null)} isSelected={selectedCategory === null} />
+        <Badge content="Все категории" colorId={0} onClick={() => setSelectedCategory(null)} isSelected={selectedCategory === null} />
         {categories.map((cat: any) => (
-          <Badge key={cat.id} content={cat.name} onClick={() => setSelectedCategory(Number(cat.id))} isSelected={selectedCategory === Number(cat.id)} />
+          <Badge key={cat.id} colorId={cat.id} content={cat.name} onClick={() => setSelectedCategory(Number(cat.id))} isSelected={selectedCategory === Number(cat.id)} />
         ))}
       </div>
       {/* Компонент списка товаров принимает выбранную категорию */}

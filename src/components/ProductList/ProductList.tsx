@@ -41,6 +41,14 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null, ha
     });
   });
 
+  const categories = useSelector((state: RootState) => {
+    const session = orm.session(state.orm);
+    return session.Category.all().toModelArray().reduce((acc, curr) => {
+      acc[curr.id] = curr;
+      return acc;
+    }, {});
+  });
+
   // Фильтруем товары по выбранной категории (если задана)
   const filteredProducts = useMemo(() => {
     return selectedCategoryId
@@ -50,9 +58,11 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null, ha
 
   return (
     <div className={styles.itemsWrapper}>
-      {filteredProducts.map(product => (
-        <ItemCard key={product.id} product={product} />
-      ))}
+      {filteredProducts.map(product => {
+        return (
+          <ItemCard key={product.id} product={product} categoryName={categories[product.category_id]?.name} />
+        )
+      })}
       <div ref={loaderRef} style={{ height: '20px', textAlign: 'center', margin: '16px 0' }}>
         {loading && <p>Загрузка...</p>}
         {!hasMore && <p>Больше товаров нет</p>}

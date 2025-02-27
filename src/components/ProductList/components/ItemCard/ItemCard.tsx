@@ -5,13 +5,15 @@ import colors from '../../../../colors/baseColors.module.scss'
 import { useNavigate } from 'react-router-dom';
 import { ProductListItem } from '../../types';
 import productImage from "../../../../images/product.png";
+import Badge from '../../../Badge/Badge';
 
 interface ItemCardProps {
     product: ProductListItem;
     onAddToCart?: (product: ProductListItem) => void;
+    categoryName?: string;
 };
 
-const ItemCard = ({ product, onAddToCart }: ItemCardProps) => {
+const ItemCard = ({ product, onAddToCart, categoryName }: ItemCardProps) => {
     const navigate = useNavigate();
 
     const handleAddToCart = () => {
@@ -22,7 +24,10 @@ const ItemCard = ({ product, onAddToCart }: ItemCardProps) => {
     return (
         <div className={styles.card}>
             <div className={styles.productDescription}>
-                <img src={productImage} className={styles.productImage} />
+                <div className={styles.productPreviewWrapper}>
+                    <img src={productImage} className={styles.productImage} />
+                    <div className={styles.productCategory}>{categoryName && <Badge content={categoryName} isSelected colorId={product.category_id} />}</div>
+                </div>
                 <div className={styles.productName}>
                     {product.name}
                 </div>

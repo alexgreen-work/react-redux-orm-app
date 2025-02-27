@@ -5,12 +5,11 @@
   cursor: pointer;
   border-radius: 40.91px;
   background: transparent;
-  border: 1px solid colors.$badge-color;
+  border: 1px solid;
   font-size: 14px;
   white-space: nowrap;
 
   &.active {
     color: colors.$white;
-    background: colors.$badge-color;
   }
 }

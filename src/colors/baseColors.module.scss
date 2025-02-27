@@ -1,28 +1,29 @@
-$primary-color: #2967FF;
+$primary-color: #2967ff;
 $secondary-color: #2ecc71;
 $error-color: #e74c3c;
 $background-color: #ecf0f1;
-$text-color: #2D2D2F;
-$text-color-light: #8D8D8E;
+$text-color: #2d2d2f;
+$text-color-light: #8d8d8e;
 $link-color: #727280;
 $white: #fff;
-$border-color: #F0F4FB;
-$badge-color: #FF2D87;
+$orange: #ffa601;
+$border-color: #f0f4fb;
 $dark-border-color: #727280;
-$pink: #FF2D87;
-$footer-color: #F8F8F8;
+$pink: #ff2d87;
+$footer-color: #f8f8f8;
 
 :export {
-    primaryColor: $primary-color;
-    secondaryColor: $secondary-color;
-    errorColor: $error-color;
-    backgroundColor: $background-color;
-    textColor: $text-color;
-    white: $white;
-    linkColor: $link-color;
-    borderColor: $border-color;
-    darkBorderColor: $dark-border-color;
-    textColorLight: $text-color-light;
-    pink: $pink;
-    footer-color: $footer-color;
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  errorColor: $error-color;
+  backgroundColor: $background-color;
+  textColor: $text-color;
+  white: $white;
+  orange: $orange;
+  linkColor: $link-color;
+  borderColor: $border-color;
+  darkBorderColor: $dark-border-color;
+  textColorLight: $text-color-light;
+  pink: $pink;
+  footer-color: $footer-color;
 }

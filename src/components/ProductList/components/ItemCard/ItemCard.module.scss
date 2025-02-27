@@ -8,10 +8,20 @@
   margin-top: 10px;
 }
 
+.productPreviewWrapper {
+  position: relative;
+}
+
 .productDescription {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  .productCategory {
+    position: absolute;
+    bottom: 15px;
+    left: 11px;
+  }
   .productName {
     color: colors.$text-color;
     line-height: 19.6px;
