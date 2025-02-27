@@ -5,6 +5,8 @@ import ProductList from '../components/ProductList/ProductList';
 import { fetchEntities } from '../api';
 import { RootState } from '../store';
 import { orm } from '../models';
+import Badge from '../components/Badge/Badge';
+import styles from './ProductListPage.module.scss';
 
 const ProductListPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -44,7 +46,7 @@ const ProductListPage: React.FC = () => {
       const variations = await fetchEntities('ProductVariations', {
         sort: ['price', 'ASC'],
         filter: {
-          product_id: products.map((product)=>product.id)
+          product_id: products.map((product) => product.id)
         }
       });
       // Диспатчим полученные продукты. В ormReducer используется upsert, чтобы избежать дублей.
@@ -95,47 +97,16 @@ const ProductListPage: React.FC = () => {
 
   return (
     <div className="page-container">
-      <h2>Товары</h2>
+      <h3 className={styles.pageName}>Категории товаров</h3>
       {/* Секция выбора категории */}
-      <div className="category-selector" style={{ marginBottom: '16px' }}>
-        <button
-          onClick={() => setSelectedCategory(null)}
-          style={{
-            marginRight: '8px',
-            backgroundColor: selectedCategory === null ? '#1976d2' : '#e0e0e0',
-            color: selectedCategory === null ? '#fff' : '#000',
-            border: 'none',
-            padding: '8px 12px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          Все категории
-        </button>
+      <div className={styles.badgesSection} style={{ marginBottom: '16px' }}>
+        <Badge content="Все категории" onClick={() => setSelectedCategory(null)} isSelected={selectedCategory === null} />
         {categories.map((cat: any) => (
-          <button
-            key={cat.id}
-            onClick={() => setSelectedCategory(Number(cat.id))}
-            style={{
-              marginRight: '8px',
-              backgroundColor: selectedCategory === Number(cat.id) ? '#1976d2' : '#e0e0e0',
-              color: selectedCategory === Number(cat.id) ? '#fff' : '#000',
-              border: 'none',
-              padding: '8px 12px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            {cat.name}
-          </button>
+          <Badge key={cat.id} content={cat.name} onClick={() => setSelectedCategory(Number(cat.id))} isSelected={selectedCategory === Number(cat.id)} />
         ))}
       </div>
       {/* Компонент списка товаров принимает выбранную категорию */}
-      <ProductList selectedCategoryId={selectedCategory} />
-      <div ref={loaderRef} style={{ height: '20px', textAlign: 'center', margin: '16px 0' }}>
-        {loading && <p>Загрузка...</p>}
-        {!hasMore && <p>Больше товаров нет</p>}
-      </div>
+      <ProductList loaderRef={loaderRef} loading={loading} hasMore={hasMore} selectedCategoryId={selectedCategory} />
     </div>
   );
 };

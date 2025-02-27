@@ -1,0 +1,7 @@
+.itemsWrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-height: 50vh;
+  overflow: auto;
+}

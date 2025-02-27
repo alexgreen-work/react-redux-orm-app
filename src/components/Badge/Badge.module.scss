@@ -1,0 +1,16 @@
+@use "/src/colors/baseColors.module.scss" as colors;
+
+.badgeButton {
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 40.91px;
+  background: transparent;
+  border: 1px solid colors.$badge-color;
+  font-size: 14px;
+  white-space: nowrap;
+
+  &.active {
+    color: colors.$white;
+    background: colors.$badge-color;
+  }
+}

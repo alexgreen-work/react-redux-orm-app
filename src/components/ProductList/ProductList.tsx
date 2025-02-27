@@ -1,22 +1,19 @@
-// src/components/ProductList.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { orm } from '../../models';
 import { RootState } from '../../store';
-import { Link } from 'react-router-dom';
-
-interface ProductListItem {
-  id: number;
-  name: string;
-  category_id: number;
-  minPrice: number | null;
-}
+import { ProductListItem } from './types';
+import ItemCard from './components/ItemCard/ItemCard';
+import styles from './ProductList.module.scss';
 
 interface ProductListProps {
   selectedCategoryId?: number | null;
+  hasMore?: boolean;
+  loading?: boolean;
+  loaderRef: React.RefObject<HTMLDivElement>;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null }) => {
+const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null, hasMore, loaderRef, loading }) => {
   const products: ProductListItem[] = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     return session.Product.all().toModelArray().map(productModel => {
@@ -45,28 +42,21 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null }) 
   });
 
   // Фильтруем товары по выбранной категории (если задана)
-  const filteredProducts = selectedCategoryId
-    ? products.filter(p => p.category_id === selectedCategoryId)
-    : products;
+  const filteredProducts = useMemo(() => {
+    return selectedCategoryId
+      ? products.filter(p => p.category_id === selectedCategoryId)
+      : products;
+  }, [selectedCategoryId, products]);
 
   return (
-    <div>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {filteredProducts.map(product => (
-          <li key={product.id} style={{ marginBottom: '10px', padding: '8px', borderBottom: '1px solid #ccc' }}>
-            <Link to={`/product/${product.id}`} style={{ fontWeight: 'bold', textDecoration: 'none', color: '#1976d2' }}>
-              {product.name}
-            </Link>
-            <div>
-              {product.minPrice !== null ? (
-                <span>от ${product.minPrice}</span>
-              ) : (
-                <span>Цена не указана</span>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div className={styles.itemsWrapper}>
+      {filteredProducts.map(product => (
+        <ItemCard key={product.id} product={product} />
+      ))}
+      <div ref={loaderRef} style={{ height: '20px', textAlign: 'center', margin: '16px 0' }}>
+        {loading && <p>Загрузка...</p>}
+        {!hasMore && <p>Больше товаров нет</p>}
+      </div>
     </div>
   );
 };
