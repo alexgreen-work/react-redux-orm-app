@@ -1,13 +1,13 @@
-// src/pages/CartPage.tsx
 import React from 'react';
 import Cart from '../components/Cart/Cart';
+import styles from './Page.module.scss';
+import { Box } from '@mui/material';
 
 const CartPage: React.FC = () => {
   return (
-    <div className="page-container">
-      <h2>Корзина</h2>
+    <Box className={styles.page}>
       <Cart />
-    </div>
+    </Box>
   );
 };
 

@@ -6,5 +6,11 @@ import googleButton from './googleButton.svg'
 import vkIcon from './vkIcon.svg'
 import instagramIcon from './instagram.svg'
 import freeProductsIcon from './freeProductsIcon.svg'
+import bucketIcon from './bucketIcon.svg'
+import minusIcon from './minusIcon.svg'
+import plusIcon from './plusIcon.svg'
+import pinkCartIcon from './pinkCartIcon.svg'
+import persentIcon from './persentIcon.svg'
+import pinkPaketIcon from './pinkPaketIcon.svg'
 
-export {searchIcon, cartIcon,instagramIcon, vkIcon, googleButton, facebookIcon, appstoreButton, freeProductsIcon };
+export {searchIcon, cartIcon,instagramIcon, vkIcon, googleButton, facebookIcon, appstoreButton, freeProductsIcon, bucketIcon, minusIcon, plusIcon, pinkPaketIcon, persentIcon, pinkCartIcon };

@@ -1,0 +1,21 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 58px;
+    border-bottom: 1px solid colors.$primary-color-light;
+    border-radius: 20px;
+    &__header {
+        font-weight: 600;
+        font-size: 20px;
+    }
+}
+.totalprice{
+    &__label {
+    }
+    &__price {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}

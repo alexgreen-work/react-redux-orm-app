@@ -42,7 +42,7 @@ export async function fetchEntities(
 ): Promise<any[]> {
   const url = buildUrl(model, params);
   const response = await fetch(url);
-  
+  console.log(`FETCH!!! ${url}`)
   if (!response.ok) {
     throw new Error(`Ошибка при получении данных для ${model}: ${response.statusText}`);
   }
@@ -52,6 +52,7 @@ export async function fetchEntities(
   // console.log("Content-Range:", contentRange);
 
   const data = await response.json();
+  console.log('FETCH END!!!: ', {data})
   return data;
 }
 

@@ -27,7 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ variations, selectedVariation
         </Box>);
     }
     return (
-        <Box className={styles.card} sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box className={styles.card} sx={{ display: 'flex', flexDirection: 'column', padding: '20px', backgroundColor: colors.borderColor, borderRadius: '20px' }}>
             <Box className={styles.card__price} sx={{display: 'flex', alignItems: 'end'}}>
             <Box className={styles['card__price-price']}>{selectedVariation?.price}₽ </Box>
                 за шт.</Box>

@@ -1,0 +1,32 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.sales {
+    &__offer {
+        &-pcs {
+            color: colors.$primary-color;
+            border: 1px solid colors.$primary-color;
+            border-radius: 25px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        &-timer {
+            color: colors.$pink;
+            border: 1px solid colors.$pink;
+            border-left: none;
+            border-radius: 5px;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            margin-left: -10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    }
+    &__bought {
+        font-size: 14px;
+        &-count {
+            margin-left: 4px;
+            font-weight: 600;
+        }
+    }
+}
