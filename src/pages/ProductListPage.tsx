@@ -22,10 +22,10 @@ const ProductListPage: React.FC = () => {
   useEffect(() => {
     setOffset(0);
     setHasMore(true);
-    loadProducts(true);
+    loadProducts(0);
   }, [selectedCategory]);
 
-  const loadProducts = async (reset = false) => {
+  const loadProducts = async (offset: number) => {
     if (loading) return;
     setLoading(true);
     let filter = {};
@@ -57,14 +57,14 @@ const ProductListPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadProducts();
+    loadProducts(offset);
   }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
-          loadProducts();
+          loadProducts(offset);
         }
       },
       { threshold: 1.0 }
