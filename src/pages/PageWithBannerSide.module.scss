@@ -1,0 +1,22 @@
+@use '/src/sizes/sizes.module.scss' as sizes;
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    &__body {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        &-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0 50px;
+            @media (max-width: sizes.$max-phone) {
+                padding: 0
+            }
+        }
+    }
+}

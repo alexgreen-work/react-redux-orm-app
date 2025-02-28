@@ -1,0 +1,31 @@
+$max-phone-small: 500px;
+$min-phone-small: 320px;
+
+$max-phone: 767px;
+$min-phone: 320px;
+
+$max-tablet: 1024px;
+$min-tablet: 768px;
+
+$max-lg: 1300px;
+$min-lg: 1025px;
+
+$max-xlg: 1439px;
+$min-xlg: 1201px;
+
+:export {
+    maxPhoneSmall: $max-phone-small;
+    minPhoneSmall: $min-phone-small;
+
+    maxPhone: $max-phone;
+    minPhone: $min-phone;
+
+    maxTablet: $max-tablet;
+    minTablet: $min-tablet;
+
+    maxLg: $max-lg;
+    minLg: $min-lg;
+
+    maxXlg: $max-xlg;
+    minXlg: $min-xlg;
+}

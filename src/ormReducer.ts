@@ -17,7 +17,6 @@ const ormReducer = createReducer(orm, (session, action) => {
       });
     }
     if (variations) {
-      console.log({variations})
       variations.forEach((variation: any) => {
         session.ProductVariation.upsert(variation);
       });

@@ -1,5 +1,12 @@
 @use '/src/colors/baseColors.module.scss' as colors;
+@use '/src/sizes/sizes.module.scss' as sizes;
 .product {
+    &__content {
+        display: flex;
+        @media (max-width: sizes.$max-phone) {
+            flex-direction: column;
+        }
+    }
     &__title {
         font-weight: 700;
         font-size: 30px;

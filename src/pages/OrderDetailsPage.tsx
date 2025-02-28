@@ -48,7 +48,6 @@ const OrderDetailsPage: React.FC = () => {
     return order.items.map((item) => {
       const product = productsMap[item.productId];
       const variation = variationsMap[item.variationId];
-      console.log({product, variation})
       if(product && variation){
         return <HistoryProduct cartItem={item} product={product} variation={variation} />
       }

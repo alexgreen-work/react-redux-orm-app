@@ -52,7 +52,6 @@ const Cart: React.FC = () => {
 
         }
         if (!variationsMap[item.variationId]) {
-          console.log(' if (!variationsMap[item.variationId])', { variationsMap, id: item.variationId, test: variationsMap[item.variationId] })
           const variation = await fetchEntities('ProductVariations', {
             sort: ['price', 'ASC'],
             filter: {

@@ -1,6 +1,10 @@
 @use '/src/colors/baseColors.module.scss' as colors;
+@use '/src/sizes/sizes.module.scss' as sizes;
 .checkout{
     display: flex;
+    @media (max-width: sizes.$max-phone) {
+        flex-direction: column;
+    }
     &__check {
         margin-right: 80px;
         min-width: 300px;

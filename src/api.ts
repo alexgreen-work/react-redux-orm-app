@@ -42,17 +42,11 @@ export async function fetchEntities(
 ): Promise<any[]> {
   const url = buildUrl(model, params);
   const response = await fetch(url);
-  console.log(`FETCH!!! ${url}`)
   if (!response.ok) {
     throw new Error(`Ошибка при получении данных для ${model}: ${response.statusText}`);
   }
 
-  // Если нужно получить общее количество записей, можно прочитать заголовок "Content-Range"
-  // const contentRange = response.headers.get("Content-Range");
-  // console.log("Content-Range:", contentRange);
-
   const data = await response.json();
-  console.log('FETCH END!!!: ', {data})
   return data;
 }
 

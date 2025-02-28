@@ -22,7 +22,7 @@ const Header: React.FC = () => (
       </Box>
     </Box>
     <Box className={styles.header__right}>
-      <Box className={styles['header__right-item']}>
+      <Box className={cx(styles['header__right-item'], styles['header__right-item-searchbar'])}>
         <SearchBar />
       </Box>
       <Box className={styles['header__right-item']}>

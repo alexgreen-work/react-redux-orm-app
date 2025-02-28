@@ -1,8 +1,13 @@
 @use '/src/colors/baseColors.module.scss' as colors;
+@use '/src/sizes/sizes.module.scss' as sizes;
 .header {
     display: flex;
     padding: 20px 50px;
     justify-content: space-between;
+
+    @media (max-width: sizes.$max-phone) {
+        padding: 0
+    }
 
     &__left {
         display: flex;
@@ -35,6 +40,12 @@
             }
 
             margin-left: 20px;
+
+            &-searchbar {
+                @media (max-width: sizes.$min-lg) {
+                    display: none;
+                }
+            }
         }
     }
 }

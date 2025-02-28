@@ -71,7 +71,7 @@ const Product: React.FC = () => {
             <Box className={styles.product__title}>
                 {product.name}
             </Box>
-            <Box className={styles.product__content} sx={{display: 'flex'}}>
+            <Box className={styles.product__content}>
                 <Box className={styles.content__left}>
                     <Carousel/>
                 </Box>

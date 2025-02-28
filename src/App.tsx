@@ -27,7 +27,6 @@ const App: React.FC = () => {
         const categories = await fetchEntities('Categories', {
           sort: ['name', 'ASC'],
         });
-        console.log({ products })
         const variations = await fetchEntities('ProductVariations', {
           sort: ['price', 'ASC'],
           filter: {

@@ -11,11 +11,12 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({  }) => {
     return (
         <Paper
+            className={styles.searchbar}
             component="form"
             sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 468, borderRadius: 36, border: `1px solid ${colors.borderColor}`, boxShadow: "none" }}
         >
             <InputBase
-                sx={{ ml: 1, flex: 1, padding: "8px 20px" }}
+                className={styles.searchbar__input}
                 placeholder="Поиск бренда, товара, категории..."
                 inputProps={{ 'aria-label': 'Поиск бренда, товара, категории...' }}
             />
