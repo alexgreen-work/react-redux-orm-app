@@ -1,0 +1,25 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.content {
+    &__products {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__head {
+        margin-top: 40px;
+        font-weight: 700;
+        font-size: 20px;
+    }
+}
+
+.order {
+    &__name {
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 40px;
+    }
+    &__back {
+        &>a {
+            color: colors.$primary-color;
+        }
+    }
+}
