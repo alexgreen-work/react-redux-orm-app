@@ -1,0 +1,21 @@
+@use '/src/colors/baseColors.module.scss' as colors;
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    &:last-child {
+        margin-right: 0;
+    }
+    &__label {
+        color: colors.$link-color;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    &__value {
+        margin-top: 5px;
+        font-weight: 600;
+        font-size: 12px;
+
+    }
+}

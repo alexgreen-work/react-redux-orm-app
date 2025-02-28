@@ -5,9 +5,8 @@ import { Box } from '@mui/material';
 
 const CartPage: React.FC = () => {
   return (
-    <Box className={styles.page}>
+    
       <Cart />
-    </Box>
   );
 };
 

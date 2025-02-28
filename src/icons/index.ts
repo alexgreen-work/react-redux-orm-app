@@ -12,5 +12,7 @@ import plusIcon from './plusIcon.svg'
 import pinkCartIcon from './pinkCartIcon.svg'
 import persentIcon from './persentIcon.svg'
 import pinkPaketIcon from './pinkPaketIcon.svg'
+import chevronUpIcon from './chevronUpIcon.svg'
+import copyIcon from './copyIcon.svg'
 
-export {searchIcon, cartIcon,instagramIcon, vkIcon, googleButton, facebookIcon, appstoreButton, freeProductsIcon, bucketIcon, minusIcon, plusIcon, pinkPaketIcon, persentIcon, pinkCartIcon };
+export {searchIcon, cartIcon,instagramIcon, vkIcon, googleButton, facebookIcon, appstoreButton, freeProductsIcon, bucketIcon, minusIcon, plusIcon, pinkPaketIcon, persentIcon, pinkCartIcon, chevronUpIcon, copyIcon};
