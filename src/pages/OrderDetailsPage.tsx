@@ -18,7 +18,6 @@ const OrderDetailsPage: React.FC = () => {
     state.orders.orders.find((o: Order) => o.id === orderId)
   );
 
-  // Маппинг продуктов из Redux‑ORM
   const productsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     const productsArray: Product[] = session.Product.all().toModelArray();
@@ -30,7 +29,6 @@ const OrderDetailsPage: React.FC = () => {
     return map;
   });
 
-  // Маппинг вариаций из Redux‑ORM
   const variationsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     const variationsArray: ProductVariation[] = session.ProductVariation.all().toModelArray();
@@ -44,12 +42,6 @@ const OrderDetailsPage: React.FC = () => {
   if (!order) {
     return <div>Заказ не найден</div>;
   }
-
-  const calculateTotalForItem = (item: any): number => {
-    const variation = variationsMap[item.variationId];
-    const price = variation ? variation.price : 0;
-    return price * item.quantity;
-  };
 
 
   const showProducts = () => {
@@ -76,48 +68,6 @@ const OrderDetailsPage: React.FC = () => {
         </Box>
       </Box>
     </Box>
-    // <div className="page-container">
-    //   <h2>Детали заказа №{order.id}</h2>
-    //   <p>
-    //     <strong>Имя:</strong> {order.name}
-    //   </p>
-    //   <p>
-    //     <strong>Адрес:</strong> {order.address}
-    //   </p>
-    //   <p>
-    //     <strong>Телефон:</strong> {order.phone}
-    //   </p>
-    //   <p>
-    //     <strong>Время:</strong> {order.time}
-    //   </p>
-    //   <p>
-    //     <strong>Дата оформления:</strong>{' '}
-    //     {new Date(order.createdAt).toLocaleString()}
-    //   </p>
-    //   <h3>Товары в заказе</h3>
-    //   <ul>
-    //     {order.items.map(item => {
-    //       const product = productsMap[item.productId];
-    //       const variation = variationsMap[item.variationId];
-    //       const itemTotal = calculateTotalForItem(item);
-    //       return (
-    //         <li key={`${item.productId}-${item.variationId}`} style={{ marginBottom: '10px' }}>
-    //           {product ? product.name : `Продукт с id ${item.productId}`} –{' '}
-    //           {item.quantity} шт.{' '}
-    //           {variation
-    //             ? `по $${variation.price} = $${itemTotal.toFixed(2)}`
-    //             : 'цена не указана'}
-    //         </li>
-    //       );
-    //     })}
-    //   </ul>
-    //   <p>
-    //     <strong>Общая стоимость заказа:</strong> ${totalCost.toFixed(2)}
-    //   </p>
-    //   <Link to="/orders">
-    //     <button>Назад к истории заказов</button>
-    //   </Link>
-    // </div>
   );
 };
 

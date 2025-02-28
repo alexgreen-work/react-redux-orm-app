@@ -1,22 +1,22 @@
-// src/pages/OrderCheckoutPage.tsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOrder } from '../slices/ordersSlice';
+import { addOrder, Order } from '../slices/ordersSlice';
 import { clearCart } from '../slices/cartSlice';
 import { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
-
-// Material UI компоненты
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
-// Импортируем наш CustomTimePicker
 import CustomTimePicker from '../components/CustomTimePicker/CustomTimePicker';
 
-// Функция для получения сегодняшней даты в формате "YYYY-MM-DD"
+import styles from './OrderCheckoutPage.module.scss';
+import { Box } from '@mui/material';
+import { orm } from '../models';
+import { ProductVariation } from '../types';
+import StyledButton from '../components/StyledButton/StyledButton';
+import TimePicker from '../components/TImePicker/TimePicker';
+
 const getTodayDate = (): string => new Date().toISOString().split('T')[0];
 
-// Функция для дополнения числа нулём
 const pad = (num: number) => num.toString().padStart(2, '0');
 
 const OrderCheckoutPage: React.FC = () => {
@@ -27,12 +27,22 @@ const OrderCheckoutPage: React.FC = () => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
-  // Храним выбранное время в формате "HH:mm"
   const [time, setTime] = useState('00:00');
-  // Устанавливаем дату по умолчанию — сегодня
   const [date, setDate] = useState(getTodayDate());
   const [error, setError] = useState('');
   const [phoneError, setPhoneError] = useState('');
+
+  const deliveryPrice = 200;
+
+  const variationsMap = useSelector((state: RootState) => {
+    const session = orm.session(state.orm);
+    const variationsArray: ProductVariation[] = session.ProductVariation.all().toModelArray();
+    const map: Record<number, ProductVariation> = {};
+    variationsArray.forEach(variation => {
+      map[Number(variation.id)] = variation;
+    });
+    return map;
+  });
 
   // Валидация телефона: 10-15 цифр, может начинаться с +
   const validatePhone = (phone: string): boolean => {
@@ -83,12 +93,6 @@ const OrderCheckoutPage: React.FC = () => {
     navigate('/orders');
   };
 
-  // При фокусе на поле даты, если значение пустое, устанавливаем сегодняшний день
-  const handleDateFocus = () => {
-    if (!date) setDate(getTodayDate());
-  };
-
-  // Если выбранная дата — сегодня, вычисляем минимальное время как текущее время
   const todayDate = getTodayDate();
   let minTime: string | undefined = undefined;
   if (date === todayDate) {
@@ -96,65 +100,101 @@ const OrderCheckoutPage: React.FC = () => {
     minTime = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
   }
 
+  const calcTotalPrice = () => {
+    let res = 0;
+    cartItems.forEach((item) => {
+      const variation = variationsMap[item.variationId];
+      if (variation) {
+        res = res + (variation.price * item.quantity)
+      }
+    })
+    return res;
+  }
+
+  const calcTotalPriceWithDelivery = () => {
+    const res = calcTotalPrice() + deliveryPrice;
+    return res;
+  }
+
   return (
-    <div className="page-container">
-      <h2>Оформление заказа</h2>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          maxWidth: '400px',
-          margin: '0 auto',
-        }}
-      >
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <TextField
-          label="Имя"
-          variant="outlined"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <TextField
-          label="Адрес"
-          variant="outlined"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-        />
-        <TextField
-          label="Телефон"
-          variant="outlined"
-          value={phone}
-          onChange={handlePhoneChange}
-          required
-          type="tel"
-          helperText={phoneError || "Введите номер телефона (10–15 цифр, может начинаться с +)"}
-          error={Boolean(phoneError)}
-        />
-        {/* Поле выбора даты с сегодняшним днём по умолчанию и недоступными прошедшими датами */}
-        <TextField
-          label="Дата"
-          variant="outlined"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          onFocus={handleDateFocus}
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ min: getTodayDate() }}
-          required
-        />
-        <div>
-          <label style={{ display: 'block', marginBottom: '8px' }}>Время</label>
-          <CustomTimePicker value={time} onChange={setTime} required minTime={minTime} />
-        </div>
-        <Button variant="contained" color="primary" type="submit">
-          Оформить заказ
-        </Button>
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit}
+    >
+      <Box className={styles.checkout}>
+        <Box className={styles.checkout__form}>
+          <Box className={styles.form__header}>Доставка</Box>
+          <Box className={styles.form__field}>
+            <Box className={styles['form__field-label']}>Когда доставить?</Box>
+            <Box className={styles['form__field-input']}>
+              <CustomTimePicker value={time} onChange={setTime} required minTime={minTime} />
+            </Box>
+          </Box>
+          <Box className={styles.form__field}>
+            <Box className={styles['form__field-label']}>Куда доставить?</Box>
+            <Box className={styles['form__field-input']}>
+              <TextField
+                variant="standard"
+                fullWidth
+                size={'small'}
+                placeholder='Выберите адрес доставки'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </Box>
+          </Box>
+          <Box className={styles.form__field}>
+            <Box className={styles['form__field-label']}>Имя</Box>
+            <Box className={styles['form__field-input']}>
+              <TextField
+                variant="standard"
+                fullWidth
+                size={'small'}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Box>
+          </Box>
+          <Box className={styles.form__field}>
+            <Box className={styles['form__field-label']}>Телефон</Box>
+            <Box className={styles['form__field-input']}>
+              <TextField
+                fullWidth
+                variant="standard"
+                size={'small'}
+                value={phone}
+                onChange={handlePhoneChange}
+                required
+                type="tel"
+                helperText={phoneError || "Введите номер телефона (10–15 цифр, может начинаться с +)"}
+                error={Boolean(phoneError)}
+              />
+            </Box>
+          </Box>
+        </Box>
+
+        <Box className={styles.checkout__check}>
+          <Box className={styles['checkout__check-wrapper']}>
+            <Box className={styles.check__row}>
+              <Box className={styles['check__row-field']}>Стоимость товаров: </Box>
+              <Box className={styles['check__row-value']}>{calcTotalPrice()}₽</Box>
+            </Box>
+            <Box className={styles.check__row}>
+              <Box className={styles['check__row-field']}>Стоимость доставки: </Box>
+              <Box className={styles['check__row-value']}>{deliveryPrice}₽</Box>
+            </Box>
+            <Box className={styles.check__total}>
+              <Box className={styles['check__total-field']}>Итого: </Box>
+              <Box className={styles['check__total-value']}>{calcTotalPriceWithDelivery()}₽</Box>
+            </Box>
+          </Box>
+          <Box className={styles['checkout__check-submit']}>
+            <StyledButton type='submit'>Сделать заказ</StyledButton>
+          </Box>
+        </Box>
+      </Box>
+    </form>
   );
 };
 
