@@ -5,6 +5,7 @@ import { RootState } from '../../store';
 import { ProductListItem } from './types';
 import ItemCard from './components/ItemCard/ItemCard';
 import styles from './ProductList.module.scss';
+import { Category, Product, ProductVariation } from '../../types';
 
 interface ProductListProps {
   selectedCategoryId?: number | null;
@@ -16,11 +17,10 @@ interface ProductListProps {
 const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null, hasMore, loaderRef, loading }) => {
   const products: ProductListItem[] = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
-    return session.Product.all().toModelArray().map(productModel => {
-      // Получаем вариации для данного товара
-      const variations = session.ProductVariation.all()
+    return session.Product.all().toModelArray().map((productModel: Product) => {
+      const variations: ProductVariation[] = session.ProductVariation.all()
         .toModelArray()
-        .filter(variation => Number(variation.product_id) === Number(productModel.id));
+        .filter((variation: ProductVariation) => Number(variation.product_id) === Number(productModel.id));
       const validVariations = variations.filter(v => {
         const price = Number(v.price);
         return v.price != null && !isNaN(price);
@@ -43,13 +43,12 @@ const ProductList: React.FC<ProductListProps> = ({ selectedCategoryId = null, ha
 
   const categories = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
-    return session.Category.all().toModelArray().reduce((acc, curr) => {
+    return session.Category.all().toModelArray().reduce((acc: Category[], curr: Category) => {
       acc[curr.id] = curr;
       return acc;
     }, {});
   });
 
-  // Фильтруем товары по выбранной категории (если задана)
   const filteredProducts = useMemo(() => {
     return selectedCategoryId
       ? products.filter(p => p.category_id === selectedCategoryId)

@@ -1,4 +1,3 @@
-// src/ormReducer.ts
 import { createReducer } from 'redux-orm';
 import { orm } from './models';
 
@@ -7,7 +6,6 @@ const ormReducer = createReducer(orm, (session, action) => {
     const { products, categories, variations } = action.payload;
     if (categories) {
       categories.forEach((category: any) => {
-        // Можно использовать upsert, чтобы обновлять уже существующие записи
         session.Category.upsert(category);
       });
     }

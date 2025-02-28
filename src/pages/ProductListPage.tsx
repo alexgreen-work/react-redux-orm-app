@@ -11,28 +11,23 @@ import styles from './ProductListPage.module.scss';
 const ProductListPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  // Выбранная категория (null – показывать все товары)
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
-  // Параметры infinite scroll
   const [offset, setOffset] = useState(0);
   const limit = 25;
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef<HTMLDivElement>(null);
 
-  // При смене категории сбрасываем offset и список (если необходимо)
   useEffect(() => {
     setOffset(0);
     setHasMore(true);
     loadProducts(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCategory]);
 
   const loadProducts = async (reset = false) => {
     if (loading) return;
     setLoading(true);
-    // Формируем фильтр по категории, если выбрана
     let filter = {};
     if (selectedCategory !== null) {
       filter = { category_id: selectedCategory };
@@ -49,7 +44,6 @@ const ProductListPage: React.FC = () => {
           product_id: products.map((product) => product.id)
         }
       });
-      // Диспатчим полученные продукты. В ormReducer используется upsert, чтобы избежать дублей.
       dispatch({ type: 'data/loaded', payload: { products, variations } });
       if (products.length < limit) {
         setHasMore(false);
@@ -62,13 +56,10 @@ const ProductListPage: React.FC = () => {
     }
   };
 
-  // Изначальная загрузка (без фильтра, если ещё не загружено)
   useEffect(() => {
     loadProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Настраиваем IntersectionObserver для infinite scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
@@ -86,10 +77,8 @@ const ProductListPage: React.FC = () => {
         observer.unobserve(loaderRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasMore, loading]);
 
-  // Получаем список категорий из Redux‑ORM
   const categories = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     return session.Category.all().toModelArray();
@@ -98,14 +87,12 @@ const ProductListPage: React.FC = () => {
   return (
     <div className="page-container">
       <h3 className={styles.pageName}>Категории товаров</h3>
-      {/* Секция выбора категории */}
       <div className={styles.badgesSection} style={{ marginBottom: '16px' }}>
         <Badge content="Все категории" colorId={0} onClick={() => setSelectedCategory(null)} isSelected={selectedCategory === null} />
         {categories.map((cat: any) => (
           <Badge key={cat.id} colorId={cat.id} content={cat.name} onClick={() => setSelectedCategory(Number(cat.id))} isSelected={selectedCategory === Number(cat.id)} />
         ))}
       </div>
-      {/* Компонент списка товаров принимает выбранную категорию */}
       <ProductList loaderRef={loaderRef} loading={loading} hasMore={hasMore} selectedCategoryId={selectedCategory} />
     </div>
   );

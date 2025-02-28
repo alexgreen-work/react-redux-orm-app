@@ -1,20 +1,15 @@
-// src/components/CategoryList.tsx
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { orm } from '../models';
 import { RootState } from '../store';
-
-interface Category {
-  id: number;
-  name: string;
-}
+import { Category } from '../../types';
 
 const CategoryList: React.FC = () => {
   const categories: Category[] = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     return session.Category.all()
       .toModelArray()
-      .map(categoryModel => ({
+      .map((categoryModel: Category) => ({
         id: categoryModel.id,
         name: categoryModel.name,
       }));

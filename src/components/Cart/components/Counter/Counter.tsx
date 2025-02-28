@@ -1,14 +1,6 @@
-// src/components/Header.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
-import StyledButton from '../StyledButton/StyledButton';
-import { Box, Typography } from '@mui/material';
-import SearchBar from './components/SearchBar/SearchBar';
-import Avatar from './components/StyledAvatar/StyledAvatar';
-import Cart from './components/Cart/Cart';
+import { Box } from '@mui/material';
 import styles from './Counter.module.scss';
-import { cx } from '@emotion/css';
-import moment from 'moment';
 import { minusIcon, plusIcon } from '../../../../icons';
 
 interface CounterProps {

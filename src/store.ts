@@ -1,10 +1,8 @@
-// src/store.ts
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import ormReducer from './ormReducer';
 import cartReducer, { CartState } from './slices/cartSlice';
 import ordersReducer, { OrdersState } from './slices/ordersSlice';
 
-// Универсальная функция для загрузки состояния из localStorage по ключу
 function loadState<T>(key: string): T | undefined {
   try {
     const serializedState = localStorage.getItem(key);
@@ -18,7 +16,6 @@ function loadState<T>(key: string): T | undefined {
   }
 }
 
-// Универсальная функция для сохранения состояния в localStorage по ключу
 function saveState<T>(key: string, state: T) {
   try {
     const serializedState = JSON.stringify(state);

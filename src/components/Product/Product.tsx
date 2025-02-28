@@ -1,14 +1,10 @@
-// src/components/Header.tsx
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import StyledButton from '../StyledButton/StyledButton';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { fetchEntities, fetchEntityById } from '../../api';
 import { addToCart } from '../../slices/cartSlice';
-import colors from '/src/colors/baseColors.module.scss'
 import styles from "./Product.module.scss";
-import productImage from "../../images/product.png";
 import Carousel from './components/Carousel/Carousel';
 import { Product as ProductType, ProductVariation } from '../../types';
 import ProductCard from './components/ProductCard/ProductCard';
@@ -25,11 +21,9 @@ const Product: React.FC = () => {
     useEffect(() => {
         async function loadProduct() {
             try {
-                // Загружаем данные товара
                 const productData = await fetchEntityById('Products', Number(id));
                 setProduct(productData);
 
-                // Загружаем варианты для данного товара
                 const variationsData = await fetchEntities('ProductVariations', {
                     filter: { product_id: Number(id) }
                 });

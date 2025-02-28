@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOrder, Order } from '../slices/ordersSlice';
+import { addOrder } from '../slices/ordersSlice';
 import { clearCart } from '../slices/cartSlice';
 import { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import CustomTimePicker from '../components/CustomTimePicker/CustomTimePicker';
 
 import styles from './OrderCheckoutPage.module.scss';
@@ -13,7 +12,6 @@ import { Box } from '@mui/material';
 import { orm } from '../models';
 import { ProductVariation } from '../types';
 import StyledButton from '../components/StyledButton/StyledButton';
-import TimePicker from '../components/TImePicker/TimePicker';
 
 const getTodayDate = (): string => new Date().toISOString().split('T')[0];
 

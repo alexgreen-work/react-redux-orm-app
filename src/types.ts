@@ -11,3 +11,8 @@ export interface ProductVariation {
     price: number;
     stock: number;
 }
+
+export interface Category {
+    id: number;
+    name: string;
+}

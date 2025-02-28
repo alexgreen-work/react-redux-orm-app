@@ -1,16 +1,8 @@
-// src/components/Header.tsx
 import React from 'react';
-import { Link } from 'react-router-dom';
-import StyledButton from '../StyledButton/StyledButton';
-import { Box, Typography } from '@mui/material';
-import SearchBar from './components/SearchBar/SearchBar';
-import Avatar from './components/StyledAvatar/StyledAvatar';
-import Cart from './components/Cart/Cart';
+import { Box,  } from '@mui/material';
 import styles from './HistoryProduct.module.scss';
-import { cx } from '@emotion/css';
 import { Product, ProductVariation } from '../../types';
 import productImage from "../../images/product.png";
-import { Order } from '../../slices/ordersSlice';
 import { CartItem } from '../../slices/cartSlice';
 
 interface HistoryProductProps {

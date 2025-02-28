@@ -1,4 +1,3 @@
-// src/api.ts
 const API_BASE = "https://test2.sionic.ru/api/";
 
 /**

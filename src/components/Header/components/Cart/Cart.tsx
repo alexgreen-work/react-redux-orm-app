@@ -2,9 +2,7 @@ import { Avatar, Box, Button, ButtonProps, Icon, IconButton, InputBase, Paper, S
 import React from "react";
 import colors from '../../../../colors/baseColors.module.scss'
 import styles from "./Cart.module.scss";
-import { css, cx } from "@emotion/css";
 import { cartIcon, searchIcon } from "../../../../icons";
-import avatarImage from "../../../../images/avatar.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { Link } from "react-router-dom";

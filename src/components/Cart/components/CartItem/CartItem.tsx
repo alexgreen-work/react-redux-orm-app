@@ -1,17 +1,9 @@
-// src/components/Header.tsx
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import StyledButton from '../StyledButton/StyledButton';
-import { Box, Typography } from '@mui/material';
-import SearchBar from './components/SearchBar/SearchBar';
-import Avatar from './components/StyledAvatar/StyledAvatar';
-import Cart from './components/Cart/Cart';
+import { Box } from '@mui/material';
 import styles from './CartItem.module.scss';
-import { cx } from '@emotion/css';
 import { Product, ProductVariation } from '../../../../types';
 import { bucketIcon } from '../../../../icons';
 import cartImage from "../../../../images/cartImage.png";
-import colors from '../../../../colors/baseColors.module.scss';
 import Counter from '../Counter/Counter';
 import Sales from '../Sales/Sales';
 import moment from 'moment';

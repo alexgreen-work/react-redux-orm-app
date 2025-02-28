@@ -1,4 +1,3 @@
-// src/models.ts
 import { ORM, Model, attr, fk } from 'redux-orm';
 
 export class Category extends Model {
@@ -23,7 +22,7 @@ export class ProductVariation extends Model {
   static modelName = 'ProductVariation';
   static fields = {
     id: attr(),
-    product_id: attr(), // Можно заменить на fk, если потребуется связь: fk({ to: Product, as: 'product' })
+    product_id: attr(),
     price: attr(),
     stock: attr(),
   };

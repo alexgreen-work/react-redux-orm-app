@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import { cx } from '@emotion/css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import BannerSide from '../components/BannerSide/BannerSide';
@@ -14,7 +13,7 @@ interface PageWithBannerSideProps {
 }
 
 const PageWithBannerSide: React.FC<PageWithBannerSideProps> = ({ children }) => {
-    const {isLg, isXlg, isLessLg, width, isMoreXlg} = useWidth();
+    const {isXlg, isLessLg, isMoreXlg} = useWidth();
     return (
         <Box className={selfStyles.wrapper}>
             <Box className={selfStyles.wrapper__body}>

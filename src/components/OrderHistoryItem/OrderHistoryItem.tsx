@@ -1,13 +1,8 @@
-// src/components/Header.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import StyledButton from '../StyledButton/StyledButton';
-import { Box, Typography } from '@mui/material';
-import SearchBar from './components/SearchBar/SearchBar';
-import Cart from './components/Cart/Cart';
+import { Box } from '@mui/material';
 import styles from './OrderHistoryItem.module.scss';
-import { cx } from '@emotion/css';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import Field from './components/Field/Field';
 import { chevronUpIcon, copyIcon } from '../../icons';
 import miImage from "../../images/mi.png";
@@ -15,6 +10,7 @@ import { Order } from '../../slices/ordersSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { orm } from '../../models';
+import { ProductVariation } from '../../types';
 
 interface OrderHistoryItemProps {
     label?: string;
@@ -23,7 +19,7 @@ interface OrderHistoryItemProps {
 const OrderHistoryItem: React.FC<OrderHistoryItemProps & Order> = ({label = 'Xiaomi', id, name, address, items, time}) => {
       const variationsMap = useSelector((state: RootState) => {
         const session = orm.session(state.orm);
-        const variationsArray = session.ProductVariation.all().toModelArray();
+        const variationsArray:ProductVariation[] = session.ProductVariation.all().toModelArray();
         const map: Record<number, { id: number; price: number }> = {};
         variationsArray.forEach(variation => {
           map[Number(variation.id)] = {
@@ -48,7 +44,6 @@ const OrderHistoryItem: React.FC<OrderHistoryItemProps & Order> = ({label = 'Xia
                 <Box className={styles['order__header-image']}><img src={miImage}/> </Box>
                 <Box className={styles['order__header-info']}>
                     <Box className={styles['header__info-label']}>{label}</Box>
-                    {/* <Box className={styles['header__info-date']}>{moment(time).format('DD.MM.YYYY')}</Box> */}
                     <Box className={styles['header__info-date']}>{moment().format('DD.MM.YYYY')}</Box>
                 </Box>
                 <Box className={styles['order__header-controls']}>

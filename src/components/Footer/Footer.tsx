@@ -1,4 +1,3 @@
-// src/components/Footer.tsx
 import { Box } from '@mui/material';
 import React from 'react';
 import styles from "./Footer.module.scss";

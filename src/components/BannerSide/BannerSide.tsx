@@ -1,8 +1,6 @@
-// src/components/Footer.tsx
 import { Box } from '@mui/material';
 import React from 'react';
 import styles from "./BannerSide.module.scss";
-import { cx } from '@emotion/css';
 import BannerFree from './components/bannerFree/bannerFree';
 
 

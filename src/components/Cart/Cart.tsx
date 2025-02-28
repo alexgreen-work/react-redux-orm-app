@@ -1,4 +1,3 @@
-// src/components/Cart.tsx
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
@@ -17,7 +16,6 @@ const Cart: React.FC = () => {
   const navigate = useNavigate();
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
-  // Формируем маппинг продуктов из Redux‑ORM
   const productsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     const productsArray: Product[] = session.Product.all().toModelArray();
@@ -28,7 +26,6 @@ const Cart: React.FC = () => {
     return map;
   });
 
-  // Формируем маппинг вариаций из Redux‑ORM
   const variationsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     const variationsArray: ProductVariation[] = session.ProductVariation.all().toModelArray();
