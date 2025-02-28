@@ -1,11 +1,11 @@
 @use '/src/sizes/sizes.module.scss' as sizes;
 .page {
-    padding: 10px 50px;
-    @media (max-width: sizes.$max-phone-small) {
-        padding: 0;
-    }
+  padding: 10px 50px;
+  @media (max-width: sizes.$max-phone-small) {
+    padding: 0;
+  }
 
-    @media (max-width: sizes.$max-lg) {
-        padding-right: 0;
-    }
+  @media (max-width: sizes.$max-lg) {
+    padding-right: 0;
+  }
 }

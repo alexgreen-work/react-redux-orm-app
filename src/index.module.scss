@@ -1,31 +1,44 @@
 @use '/src/colors/baseColors.module.scss' as colors;
 
 body {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
 }
 
 #root {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    --font-family-monospace: Raleway, Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, Courier, monospace;
+  --font-family-monospace:
+    Raleway, Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, Courier, monospace;
 
-    h1 {
-        font-size: 1.375rem;
-    }
+  h1 {
+    font-size: 1.375rem;
+  }
 }
 
 a {
-    text-decoration: none;
-    color: colors.$link-color;
+  text-decoration: none;
+  color: colors.$link-color;
 }
 
-div,span,h1,h2,h3,h4,h5,h6 {
-    font-family: Raleway, -apple-system, system-ui, BlinkMacSystemFont;
-    font-weight: 400;
-  }
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    Raleway,
+    -apple-system,
+    system-ui,
+    BlinkMacSystemFont;
+  font-weight: 400;
+}

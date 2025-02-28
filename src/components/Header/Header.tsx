@@ -10,17 +10,30 @@ import { cx } from '@emotion/css';
 const Header: React.FC = () => (
   <header className={styles.header}>
     <Box className={styles.header__left}>
-      <Box className={cx(styles['header__left-item'], styles['header__left-react'])}>
+      <Box
+        className={cx(
+          styles['header__left-item'],
+          styles['header__left-react']
+        )}
+      >
         <Link to="/">React</Link>
       </Box>
-      <Box className={cx(styles['header__left-item'], styles['header__left-history'])}>
-        <Link to="/orders" >
-          История заказов
-        </Link>
+      <Box
+        className={cx(
+          styles['header__left-item'],
+          styles['header__left-history']
+        )}
+      >
+        <Link to="/orders">История заказов</Link>
       </Box>
     </Box>
     <Box className={styles.header__right}>
-      <Box className={cx(styles['header__right-item'], styles['header__right-item-searchbar'])}>
+      <Box
+        className={cx(
+          styles['header__right-item'],
+          styles['header__right-item-searchbar']
+        )}
+      >
         <SearchBar />
       </Box>
       <Box className={styles['header__right-item']}>

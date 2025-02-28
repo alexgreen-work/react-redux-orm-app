@@ -22,7 +22,7 @@ const App: React.FC = () => {
         });
         dispatch({
           type: 'data/loaded',
-          payload: { categories},
+          payload: { categories },
         });
       } catch (error) {
         console.error('Ошибка загрузки данных:', error);
@@ -36,16 +36,54 @@ const App: React.FC = () => {
       <div className="app-container">
         <main className="app-main">
           <Routes>
-            <Route path="/" element={<PageWithBannerSide><ProductListPage /></PageWithBannerSide>} />
-            <Route path="/product/:id" element={<PageWithBannerSide><ProductPage /></PageWithBannerSide>} />
-            <Route path="/cart" element={
-              <PageWithBannerSide>
-                <CartPage />
-              </PageWithBannerSide>
-            } />
-            <Route path="/checkout" element={<PageWithBannerSide><OrderCheckoutPage /></PageWithBannerSide>} />
-            <Route path="/orders" element={<PageWithBannerSide><OrderHistoryPage /></PageWithBannerSide>} />
-            <Route path="/orders/:id" element={<PageWithBannerSide><OrderDetailsPage /></PageWithBannerSide>} />
+            <Route
+              path="/"
+              element={
+                <PageWithBannerSide>
+                  <ProductListPage />
+                </PageWithBannerSide>
+              }
+            />
+            <Route
+              path="/product/:id"
+              element={
+                <PageWithBannerSide>
+                  <ProductPage />
+                </PageWithBannerSide>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <PageWithBannerSide>
+                  <CartPage />
+                </PageWithBannerSide>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <PageWithBannerSide>
+                  <OrderCheckoutPage />
+                </PageWithBannerSide>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <PageWithBannerSide>
+                  <OrderHistoryPage />
+                </PageWithBannerSide>
+              }
+            />
+            <Route
+              path="/orders/:id"
+              element={
+                <PageWithBannerSide>
+                  <OrderDetailsPage />
+                </PageWithBannerSide>
+              }
+            />
           </Routes>
         </main>
       </div>

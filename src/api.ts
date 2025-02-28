@@ -1,4 +1,4 @@
-const API_BASE = "https://test2.sionic.ru/api/";
+const API_BASE = 'https://test2.sionic.ru/api/';
 
 /**
  * Формирует URL с параметрами запроса.
@@ -6,11 +6,14 @@ const API_BASE = "https://test2.sionic.ru/api/";
  * @param params - объект с параметрами: filter, sort, range.
  * @returns Полный URL для запроса.
  */
-function buildUrl(model: string, params?: {
-  filter?: object;
-  sort?: [string, string];
-  range?: [number, number];
-}): string {
+function buildUrl(
+  model: string,
+  params?: {
+    filter?: object;
+    sort?: [string, string];
+    range?: [number, number];
+  }
+): string {
   const query: Record<string, string> = {};
 
   if (params) {
@@ -26,7 +29,7 @@ function buildUrl(model: string, params?: {
   }
 
   const queryString = new URLSearchParams(query).toString();
-  return `${API_BASE}${model}${queryString ? "?" + queryString : ""}`;
+  return `${API_BASE}${model}${queryString ? '?' + queryString : ''}`;
 }
 
 /**
@@ -37,12 +40,18 @@ function buildUrl(model: string, params?: {
  */
 export async function fetchEntities(
   model: string,
-  params?: { filter?: object; sort?: [string, string]; range?: [number, number] }
+  params?: {
+    filter?: object;
+    sort?: [string, string];
+    range?: [number, number];
+  }
 ): Promise<any[]> {
   const url = buildUrl(model, params);
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Ошибка при получении данных для ${model}: ${response.statusText}`);
+    throw new Error(
+      `Ошибка при получении данных для ${model}: ${response.statusText}`
+    );
   }
 
   const data = await response.json();
@@ -58,11 +67,13 @@ export async function fetchEntities(
 export async function fetchEntityById(model: string, id: number): Promise<any> {
   const url = `${API_BASE}${model}/${id}`;
   const response = await fetch(url);
-  
+
   if (!response.ok) {
-    throw new Error(`Ошибка при получении ${model} с id ${id}: ${response.statusText}`);
+    throw new Error(
+      `Ошибка при получении ${model} с id ${id}: ${response.statusText}`
+    );
   }
-  
+
   const data = await response.json();
   return data;
 }

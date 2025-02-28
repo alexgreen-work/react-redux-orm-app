@@ -2,33 +2,33 @@
 @use '/src/sizes/sizes.module.scss' as sizes;
 
 .cart {
-    max-width: 916px;
+  max-width: 916px;
 }
 .wrapper {
-    margin-top: 30px;
-    border: 1px solid colors.$primary-color-light;
-    border-radius: 20px;
+  margin-top: 30px;
+  border: 1px solid colors.$primary-color-light;
+  border-radius: 20px;
 }
 .header {
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    &__label {
-        font-size: 18px;
-        font-weight: 700;
-        margin-right: 16px;
-    }
-    &__control {
-        cursor: pointer;
-        color: colors.$pink;
-        font-weight: 600;
-        font-size: 14px;
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  &__label {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 16px;
+  }
+  &__control {
+    cursor: pointer;
+    color: colors.$pink;
+    font-weight: 600;
+    font-size: 14px;
+  }
 }
 
 .content {
-    padding: 40px 58px;
-    @media (max-width: sizes.$min-tablet){
-        padding: 0;
-    }
+  padding: 40px 58px;
+  @media (max-width: sizes.$min-tablet) {
+    padding: 0;
+  }
 }

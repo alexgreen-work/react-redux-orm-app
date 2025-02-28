@@ -1,18 +1,18 @@
 export interface Product {
-    id: number;
-    name: string;
-    category_id: number;
-    description: string;
+  id: number;
+  name: string;
+  category_id: number;
+  description: string;
 }
 
 export interface ProductVariation {
-    id: number;
-    product_id: number;
-    price: number;
-    stock: number;
+  id: number;
+  product_id: number;
+  price: number;
+  stock: number;
 }
 
 export interface Category {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }

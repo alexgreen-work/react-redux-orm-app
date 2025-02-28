@@ -14,18 +14,18 @@ $max-xlg: 1439px;
 $min-xlg: 1201px;
 
 :export {
-    maxPhoneSmall: $max-phone-small;
-    minPhoneSmall: $min-phone-small;
+  maxPhoneSmall: $max-phone-small;
+  minPhoneSmall: $min-phone-small;
 
-    maxPhone: $max-phone;
-    minPhone: $min-phone;
+  maxPhone: $max-phone;
+  minPhone: $min-phone;
 
-    maxTablet: $max-tablet;
-    minTablet: $min-tablet;
+  maxTablet: $max-tablet;
+  minTablet: $min-tablet;
 
-    maxLg: $max-lg;
-    minLg: $min-lg;
+  maxLg: $max-lg;
+  minLg: $min-lg;
 
-    maxXlg: $max-xlg;
-    minXlg: $min-xlg;
+  maxXlg: $max-xlg;
+  minXlg: $min-xlg;
 }

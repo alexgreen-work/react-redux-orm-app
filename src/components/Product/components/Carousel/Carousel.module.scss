@@ -1,14 +1,14 @@
-.carousel{
-    &__main {
-        &>img {
-            max-width: 400px;
-        }
+.carousel {
+  &__main {
+    & > img {
+      max-width: 400px;
     }
-    &__items{
-        &-item {
-            &>img {
-                max-width: 80px;
-            }
-        }
+  }
+  &__items {
+    &-item {
+      & > img {
+        max-width: 80px;
+      }
     }
+  }
 }

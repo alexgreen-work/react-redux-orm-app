@@ -1,18 +1,18 @@
 @use '/src/colors/baseColors.module.scss' as colors;
 .cart {
-    width: 25px;
-    height: 25px;
-    &__length {
-        position: absolute;
-        width: 31px;
-        height: 31px;
-        border-radius: 50%;
-        background: colors.$white;
-        color: colors.$primary-color;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        right: -12px;
-        top: -12px;
-    }
+  width: 25px;
+  height: 25px;
+  &__length {
+    position: absolute;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    background: colors.$white;
+    color: colors.$primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -12px;
+    top: -12px;
+  }
 }

@@ -34,9 +34,10 @@ const OrderCheckoutPage: React.FC = () => {
 
   const variationsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
-    const variationsArray: ProductVariation[] = session.ProductVariation.all().toModelArray();
+    const variationsArray: ProductVariation[] =
+      session.ProductVariation.all().toModelArray();
     const map: Record<number, ProductVariation> = {};
-    variationsArray.forEach(variation => {
+    variationsArray.forEach((variation) => {
       map[Number(variation.id)] = variation;
     });
     return map;
@@ -103,28 +104,31 @@ const OrderCheckoutPage: React.FC = () => {
     cartItems.forEach((item) => {
       const variation = variationsMap[item.variationId];
       if (variation) {
-        res = res + (variation.price * item.quantity)
+        res = res + variation.price * item.quantity;
       }
-    })
+    });
     return res;
-  }
+  };
 
   const calcTotalPriceWithDelivery = () => {
     const res = calcTotalPrice() + deliveryPrice;
     return res;
-  }
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-    >
+    <form onSubmit={handleSubmit}>
       <Box className={styles.checkout}>
         <Box className={styles.checkout__form}>
           <Box className={styles.form__header}>Доставка</Box>
           <Box className={styles.form__field}>
             <Box className={styles['form__field-label']}>Когда доставить?</Box>
             <Box className={styles['form__field-input']}>
-              <CustomTimePicker value={time} onChange={setTime} required minTime={minTime} />
+              <CustomTimePicker
+                value={time}
+                onChange={setTime}
+                required
+                minTime={minTime}
+              />
             </Box>
           </Box>
           <Box className={styles.form__field}>
@@ -134,7 +138,7 @@ const OrderCheckoutPage: React.FC = () => {
                 variant="standard"
                 fullWidth
                 size={'small'}
-                placeholder='Выберите адрес доставки'
+                placeholder="Выберите адрес доставки"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 required
@@ -165,7 +169,10 @@ const OrderCheckoutPage: React.FC = () => {
                 onChange={handlePhoneChange}
                 required
                 type="tel"
-                helperText={phoneError || "Введите номер телефона (10–15 цифр, может начинаться с +)"}
+                helperText={
+                  phoneError ||
+                  'Введите номер телефона (10–15 цифр, может начинаться с +)'
+                }
                 error={Boolean(phoneError)}
               />
             </Box>
@@ -175,20 +182,28 @@ const OrderCheckoutPage: React.FC = () => {
         <Box className={styles.checkout__check}>
           <Box className={styles['checkout__check-wrapper']}>
             <Box className={styles.check__row}>
-              <Box className={styles['check__row-field']}>Стоимость товаров: </Box>
-              <Box className={styles['check__row-value']}>{calcTotalPrice()}₽</Box>
+              <Box className={styles['check__row-field']}>
+                Стоимость товаров:{' '}
+              </Box>
+              <Box className={styles['check__row-value']}>
+                {calcTotalPrice()}₽
+              </Box>
             </Box>
             <Box className={styles.check__row}>
-              <Box className={styles['check__row-field']}>Стоимость доставки: </Box>
+              <Box className={styles['check__row-field']}>
+                Стоимость доставки:{' '}
+              </Box>
               <Box className={styles['check__row-value']}>{deliveryPrice}₽</Box>
             </Box>
             <Box className={styles.check__total}>
               <Box className={styles['check__total-field']}>Итого: </Box>
-              <Box className={styles['check__total-value']}>{calcTotalPriceWithDelivery()}₽</Box>
+              <Box className={styles['check__total-value']}>
+                {calcTotalPriceWithDelivery()}₽
+              </Box>
             </Box>
           </Box>
           <Box className={styles['checkout__check-submit']}>
-            <StyledButton type='submit'>Сделать заказ</StyledButton>
+            <StyledButton type="submit">Сделать заказ</StyledButton>
           </Box>
         </Box>
       </Box>

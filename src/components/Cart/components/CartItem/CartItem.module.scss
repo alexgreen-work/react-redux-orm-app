@@ -1,35 +1,35 @@
 @use '/src/colors/baseColors.module.scss' as colors;
-.item{
-    max-width: 916px;
-    padding: 20px 5px;
-    display: flex;
-    border-bottom: 1px solid colors.$primary-color-light;
-    &:last-child {
-        border-bottom: none;
+.item {
+  max-width: 916px;
+  padding: 20px 5px;
+  display: flex;
+  border-bottom: 1px solid colors.$primary-color-light;
+  &:last-child {
+    border-bottom: none;
+  }
+  &__image {
+    margin-right: 16px;
+    & > img {
+      width: 70px;
     }
-    &__image {
-        margin-right: 16px;
-        &>img {
-            width: 70px;
-        }
+  }
+  &__label {
+    margin-right: 16px;
+    max-width: 350px;
+    width: 100%;
+    &-variation {
+      color: colors.$text-color-light;
     }
-    &__label{
-        margin-right: 16px;
-        max-width: 350px;
-        width: 100%;
-        &-variation {
-            color: colors.$text-color-light
-        }
-        &-sales {
-            margin-top: 16px;
-        }
+    &-sales {
+      margin-top: 16px;
     }
-    &__price {
-        font-weight: 600;
-        font-size: 18px;
-    }
-    &__bucket {
-        cursor: pointer;
-        margin-left: auto;
-    }
+  }
+  &__price {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  &__bucket {
+    cursor: pointer;
+    margin-left: auto;
+  }
 }

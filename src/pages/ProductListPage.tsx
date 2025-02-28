@@ -41,8 +41,8 @@ const ProductListPage: React.FC = () => {
       const variations = await fetchEntities('ProductVariations', {
         sort: ['price', 'ASC'],
         filter: {
-          product_id: products.map((product) => product.id)
-        }
+          product_id: products.map((product) => product.id),
+        },
       });
       dispatch({ type: 'data/loaded', payload: { products, variations } });
       if (products.length < limit) {
@@ -62,7 +62,7 @@ const ProductListPage: React.FC = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
           loadProducts();
         }
@@ -88,12 +88,28 @@ const ProductListPage: React.FC = () => {
     <div className="page-container">
       <h3 className={styles.pageName}>Категории товаров</h3>
       <div className={styles.badgesSection} style={{ marginBottom: '16px' }}>
-        <Badge content="Все категории" colorId={0} onClick={() => setSelectedCategory(null)} isSelected={selectedCategory === null} />
+        <Badge
+          content="Все категории"
+          colorId={0}
+          onClick={() => setSelectedCategory(null)}
+          isSelected={selectedCategory === null}
+        />
         {categories.map((cat: any) => (
-          <Badge key={cat.id} colorId={cat.id} content={cat.name} onClick={() => setSelectedCategory(Number(cat.id))} isSelected={selectedCategory === Number(cat.id)} />
+          <Badge
+            key={cat.id}
+            colorId={cat.id}
+            content={cat.name}
+            onClick={() => setSelectedCategory(Number(cat.id))}
+            isSelected={selectedCategory === Number(cat.id)}
+          />
         ))}
       </div>
-      <ProductList loaderRef={loaderRef} loading={loading} hasMore={hasMore} selectedCategoryId={selectedCategory} />
+      <ProductList
+        loaderRef={loaderRef}
+        loading={loading}
+        hasMore={hasMore}
+        selectedCategoryId={selectedCategory}
+      />
     </div>
   );
 };

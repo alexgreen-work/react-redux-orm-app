@@ -10,11 +10,10 @@ const OrderHistoryPage: React.FC = () => {
   const orders = useSelector((state: RootState) => state.orders.orders);
 
   const showOrders = () => {
-
     return orders.map((order: Order) => {
-      return <OrderHistoryItem {...order}/>
-    })
-  }
+      return <OrderHistoryItem {...order} />;
+    });
+  };
 
   return (
     <div className="page-container">
@@ -22,9 +21,7 @@ const OrderHistoryPage: React.FC = () => {
       {orders.length === 0 ? (
         <p>Заказов пока нет</p>
       ) : (
-        <Box className={styles.orders}>
-        {showOrders()}
-        </Box>
+        <Box className={styles.orders}>{showOrders()}</Box>
       )}
     </div>
   );

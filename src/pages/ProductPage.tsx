@@ -5,10 +5,9 @@ import styles from './Page.module.scss';
 import { Box } from '@mui/material';
 
 const ProductPage: React.FC = () => {
- 
   return (
     <Box className={styles.page}>
-    <Product/>
+      <Product />
     </Box>
   );
 };

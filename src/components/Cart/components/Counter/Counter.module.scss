@@ -1,18 +1,19 @@
 @use '/src/colors/baseColors.module.scss' as colors;
 
 .counter {
-    display: flex;
-    padding: 11px 12px;
-    border-radius: 35px;
-    border: 1px solid colors.$primary-color-light;
-    margin-right: 30px;
-    &__value {
-        margin-right: 16px;
-    }
-    &__minus {
-        margin-right: 16px;
-    }
-    &__minus, &__plus {
-        cursor: pointer;
-    }
+  display: flex;
+  padding: 11px 12px;
+  border-radius: 35px;
+  border: 1px solid colors.$primary-color-light;
+  margin-right: 30px;
+  &__value {
+    margin-right: 16px;
+  }
+  &__minus {
+    margin-right: 16px;
+  }
+  &__minus,
+  &__plus {
+    cursor: pointer;
+  }
 }

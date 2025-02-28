@@ -19,7 +19,7 @@ const CategoryList: React.FC = () => {
     <div>
       <h2>Категории</h2>
       <ul>
-        {categories.map(cat => (
+        {categories.map((cat) => (
           <li key={cat.id}>{cat.name}</li>
         ))}
       </ul>

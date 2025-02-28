@@ -21,9 +21,8 @@ const OrderDetailsPage: React.FC = () => {
   const productsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
     const productsArray: Product[] = session.Product.all().toModelArray();
-    const map: Record<number, Product> =
-      {};
-    productsArray.forEach(prod => {
+    const map: Record<number, Product> = {};
+    productsArray.forEach((prod) => {
       map[Number(prod.id)] = prod;
     });
     return map;
@@ -31,9 +30,10 @@ const OrderDetailsPage: React.FC = () => {
 
   const variationsMap = useSelector((state: RootState) => {
     const session = orm.session(state.orm);
-    const variationsArray: ProductVariation[] = session.ProductVariation.all().toModelArray();
+    const variationsArray: ProductVariation[] =
+      session.ProductVariation.all().toModelArray();
     const map: Record<number, ProductVariation> = {};
-    variationsArray.forEach(variation => {
+    variationsArray.forEach((variation) => {
       map[Number(variation.id)] = variation;
     });
     return map;
@@ -43,16 +43,21 @@ const OrderDetailsPage: React.FC = () => {
     return <div>Заказ не найден</div>;
   }
 
-
   const showProducts = () => {
     return order.items.map((item) => {
       const product = productsMap[item.productId];
       const variation = variationsMap[item.variationId];
-      if(product && variation){
-        return <HistoryProduct cartItem={item} product={product} variation={variation} />
+      if (product && variation) {
+        return (
+          <HistoryProduct
+            cartItem={item}
+            product={product}
+            variation={variation}
+          />
+        );
       }
-    })
-  }
+    });
+  };
 
   return (
     <Box className={styles.order}>
@@ -62,9 +67,7 @@ const OrderDetailsPage: React.FC = () => {
       <Box className={styles.order__name}>Заказ №{order.id}</Box>
       <Box className={styles.order__content}>
         <Box className={styles.content__head}>Товары</Box>
-        <Box className={styles.content__products}>
-          {showProducts()}
-        </Box>
+        <Box className={styles.content__products}>{showProducts()}</Box>
       </Box>
     </Box>
   );

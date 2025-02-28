@@ -2,21 +2,21 @@
 @use '/src/sizes/sizes.module.scss' as sizes;
 
 .column {
-    min-height: 75vh;
-    max-width: 351px;
-    width: 100%;
-    padding: 28px 16px;
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid colors.$border-color;
-    &__banner {
-        &:last-child {
-            margin-bottom: 0;
-        }
-        margin-bottom: 30px;
+  min-height: 75vh;
+  max-width: 351px;
+  width: 100%;
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid colors.$border-color;
+  &__banner {
+    &:last-child {
+      margin-bottom: 0;
     }
-    @media (max-width: sizes.$max-lg) {
-        flex-direction: row;
-        min-height: auto;
-      }
+    margin-bottom: 30px;
+  }
+  @media (max-width: sizes.$max-lg) {
+    flex-direction: row;
+    min-height: auto;
+  }
 }

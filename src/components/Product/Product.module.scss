@@ -1,22 +1,22 @@
 @use '/src/colors/baseColors.module.scss' as colors;
 @use '/src/sizes/sizes.module.scss' as sizes;
 .product {
-    &__content {
-        display: flex;
-        @media (max-width: sizes.$max-phone) {
-            flex-direction: column;
-        }
+  &__content {
+    display: flex;
+    @media (max-width: sizes.$max-phone) {
+      flex-direction: column;
     }
-    &__title {
-        font-weight: 700;
-        font-size: 30px;
-        line-height: 38px;
-        margin-bottom: 30px;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 30px;
+  }
+  &__back {
+    margin-bottom: 42px;
+    & > a {
+      color: colors.$primary-color;
     }
-    &__back {
-        margin-bottom: 42px;
-        &>a {
-            color: colors.$primary-color
-        }
-    }
+  }
 }
