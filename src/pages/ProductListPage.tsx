@@ -57,10 +57,6 @@ const ProductListPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadProducts(offset);
-  }, []);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
