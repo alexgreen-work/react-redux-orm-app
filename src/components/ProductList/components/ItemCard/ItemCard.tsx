@@ -25,7 +25,7 @@ const ItemCard = ({ product, onAddToCart, categoryName }: ItemCardProps) => {
     <div className={styles.card}>
       <div className={styles.productDescription}>
         <div className={styles.productPreviewWrapper}>
-          <img src={productImage} className={styles.productImage} />
+          <img src={product.image?.image_url} className={styles.productImage} />
           <div className={styles.productCategory}>
             {categoryName && (
               <Badge

@@ -48,6 +48,7 @@ const ProductList: React.FC<ProductListProps> = ({
         return {
           id: productModel.id,
           name: productModel.name,
+          image: productModel.images ? productModel.images[0] : '',
           category_id: Number(productModel.category_id),
           minPrice,
         };
