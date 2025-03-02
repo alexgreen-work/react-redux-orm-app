@@ -1,4 +1,5 @@
 import { Product, ProductVariation, ProductVariationPropertyValues } from "./types";
+import _ from 'lodash';
 
 const API_BASE = 'https://test2.sionic.ru/api/';
 
@@ -6,12 +7,15 @@ interface NewField {
   name: string;
   url: (model: any) => string;
   getBody?: (model: any) => any;
+  key: string;
+  id?: string;
   extra?: NewField;
 }
 
 interface ExtraItem {
   [model: string]: {
-    newfield: NewField
+    newfield: NewField;
+    id: string;
     key: string;
   };
 }
@@ -24,37 +28,33 @@ const extra: ExtraItem = {
       getBody: (products: Product[]) => ({
         product_id: products.map((product) => product.id),
       }),
+      key: 'product_id',
     },
+    id: 'id',
     key: 'product_id',
   },
   'ProductVariations': {
     newfield: {
-      name: 'properties',
+      name: 'values',
       url: (variations: ProductVariation[]) => `/ProductVariationPropertyValues`,
-      getBody: (variations: ProductVariation[])=> ({
-        product_variation_id: variations.map((variation)=> variation.id)
+      getBody: (variations: ProductVariation[]) => ({
+        product_variation_id: variations.map((variation) => variation.id)
       }),
+      key: 'product_variation_id',
+      id: 'id',
       extra: {
-        name: 'test',
-        url: (variations: ProductVariationPropertyValues[]) => `/ProductVariationProperties`,
-        getBody: (variationPropertiesValues: ProductVariationPropertyValues[])=> ({
-          id: variationPropertiesValues.map((variationPropertiesValue)=> variationPropertiesValue.product_variation_property_id)
-        })
-      }
+        name: 'Properties',
+        url: (variationPropertiesValues: ProductVariationPropertyValues[]) => `/ProductVariationProperties`,
+        getBody: (variationPropertiesValues: ProductVariationPropertyValues[]) => ({
+          id: variationPropertiesValues.map((variationPropertiesValue) => variationPropertiesValue.product_variation_property_id)
+        }),
+        key: 'product_variation_property_id',
+        id: 'product_variation_property_id',
+      },
     },
+    id: 'id',
     key: 'product_variation_id',
   }
-  // Пример для другой модели (раскомментируйте, если нужно)
-  // 'ProductVariations': {
-  //   newfield: {
-  //     name: 'properties',
-  //     url: 'ProductVariationPropertyValues',
-  //     getBody: (variations: ProductVariation[]) => ({
-  //       product_variation_id: variations.map((variation) => variation.id),
-  //     }),
-  //   },
-  //   key: 'product_variation_id',
-  // },
 };
 
 /**
@@ -112,7 +112,7 @@ export async function getAllDataFromRequest(
   offset: number = 0
 ): Promise<any[]> {
   const limit = 50; // Лимит данных на одной странице
-  const range: [number, number] = params?.range ? params?.range : [offset * limit, (offset + 1) * limit - 1];
+  const range: [number, number] = params?.range ? params.range : [offset * limit, (offset + 1) * limit - 1];
 
   const url = buildUrl(model, { ...params, range });
   const response = await fetch(url);
@@ -125,12 +125,60 @@ export async function getAllDataFromRequest(
 
   const data = await response.json();
   if (data.length === limit && !params?.range) {
-    // Если данных больше, чем limit, рекурсивно получаем следующую страницу
     const nextPageData = await getAllDataFromRequest(model, params, offset + 1);
     return [...data, ...nextPageData];
   }
 
   return data;
+}
+
+/**
+ * Рекурсивная обработка extra данных.
+ * @param parentData - массив родительских данных.
+ * @param extraConf - конфигурация для extra.
+ */
+async function processExtraForData(
+  parentData: any[],
+  extraConf: any
+): Promise<void> {
+  const keyField = 'key' in extraConf && extraConf.key ? extraConf.key : 'id';
+  const id = extraConf.id ? extraConf.id : extraConf.newfield.id;
+  const parentMap = getObjectFromArray(parentData, id);
+
+  const subModel = extraConf.newfield.url(parentData);
+  const subParams = extraConf.newfield.getBody ? { filter: extraConf.newfield.getBody(parentData) } : {};
+  const subData = await getAllDataFromRequest(subModel, subParams);
+  for (const subItem of subData) {
+    const parentKey = _.get(subItem, keyField);
+    const value = parentMap[parentKey];
+    console.log({value, parentMap, parentKey, parentData, id, extraConf, keyField});
+    if(Array.isArray(value)){
+      for(let valueItem of value) {
+          if (!valueItem[extraConf.newfield.name]) {
+            valueItem[extraConf.newfield.name] = [];
+          } else{
+            console.log({valueItem, name: extraConf.newfield.name })
+          }
+          valueItem[extraConf.newfield.name].push(subItem);
+      }
+    }
+    if (parentMap[parentKey]) {
+      if (!parentMap[parentKey][extraConf.newfield.name]) {
+        parentMap[parentKey][extraConf.newfield.name] = [];
+      }
+      parentMap[parentKey][extraConf.newfield.name].push(subItem);
+    }
+  }
+
+  // Если есть вложенный extra, рекурсивно обрабатываем его
+  if (extraConf.newfield.extra) {
+    for (const parent of parentData) {
+      const nestedData = parent[extraConf.newfield.name];
+      if (nestedData && Array.isArray(nestedData)) {
+        await processExtraForData(nestedData, { newfield: extraConf.newfield.extra, key: 'id' });
+      }
+    }
+  }
 }
 
 /**
@@ -150,31 +198,10 @@ export async function fetchEntities(
   let data = await getAllDataFromRequest(model, params);
 
   if (extra[model]) {
-    const subRequest = extra[model];
-    const objData = getObjectFromArray(data, 'id');
-
-    const subModel = subRequest.newfield.url(data);
-    const subParams = subRequest.newfield.getBody
-      ? { filter: subRequest.newfield.getBody(data) }
-      : {};
-
-    const subData = await getAllDataFromRequest(subModel, subParams);
-
-    for (const subItem of subData) {
-      const key = subItem[subRequest.key];
-      if (objData[key]) {
-        if (!objData[key][subRequest.newfield.name]) {
-          objData[key][subRequest.newfield.name] = [];
-        }
-        objData[key][subRequest.newfield.name].push(subItem);
-      }
-    }
-
-    data = Object.values(objData);
+    await processExtraForData(data, extra[model]);
   }
 
-  console.log({data});
-
+  console.log({ data });
   return data;
 }
 

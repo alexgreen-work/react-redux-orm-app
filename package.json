@@ -8,6 +8,7 @@
         "@emotion/styled": "^11.14.0",
         "@mui/material": "^6.4.5",
         "@reduxjs/toolkit": "^1.9.0",
+        "lodash": "^4.17.21",
         "moment": "^2.30.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -20,6 +21,7 @@
         "sass": "^1.85.1"
     },
     "devDependencies": {
+        "@types/lodash": "^4.17.16",
         "@types/redux-orm": "^0.16.1",
         "prettier": "^3.5.2",
         "typescript": "^4.9.3",
