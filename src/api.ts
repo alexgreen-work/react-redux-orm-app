@@ -15,7 +15,7 @@ interface NewField {
 interface ExtraItem {
   [model: string]: {
     newfield: NewField;
-    id: string;
+    id?: string;
     key: string;
   };
 }
@@ -56,7 +56,7 @@ const extra: ExtraItem = {
           name: 'ValuesList',
           url: () => `/ProductVariationPropertyListValues`,
           getBody: (variationPropertiesValues: ProductVariationPropertyValues[]) => ({
-            id: variationPropertiesValues.map((variationPropertiesValue) => variationPropertiesValue.product_variation_property_list_value_id)
+            product_variation_property_id: variationPropertiesValues.map((variationPropertiesValue) => variationPropertiesValue.product_variation_property_id)
           }),
           key: 'product_variation_property_list_value_id',
           id: 'product_variation_property_list_value_id',

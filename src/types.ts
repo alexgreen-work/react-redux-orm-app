@@ -1,3 +1,5 @@
+import { ProductVariation } from "./models";
+
 export interface ProductImage {
   id: number;
   image_name: string,
@@ -47,4 +49,9 @@ export interface ProductVariationPropertyValues {
 export interface Category {
   id: number;
   name: string;
+}
+
+export interface PropertyVariation {
+  value: string | number;
+  variation: ProductVariation;
 }
