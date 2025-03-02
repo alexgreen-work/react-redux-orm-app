@@ -37,6 +37,7 @@ const ProductListPage: React.FC = () => {
         sort: ['name', 'ASC'],
         range: [offset, offset + limit - 1],
         filter,
+        isGetExtra: true,
       });
       const variations = await fetchEntities('ProductVariations', {
         sort: ['price', 'ASC'],

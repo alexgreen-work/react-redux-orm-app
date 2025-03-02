@@ -6,13 +6,14 @@ import { fetchEntities, fetchEntityById } from '../../api';
 import { addToCart } from '../../slices/cartSlice';
 import styles from './Product.module.scss';
 import Carousel from './components/Carousel/Carousel';
-import { Product as ProductType, ProductVariation } from '../../types';
+import { Category, Product as ProductType, ProductVariation } from '../../types';
 import ProductCard from './components/ProductCard/ProductCard';
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const [product, setProduct] = useState<ProductType | null>(null);
+  const [category, setCategory]  = useState<Category | null>(null);
   const [variations, setVariations] = useState<ProductVariation[]>([]);
   const [selectedVariation, setSelectedVariation] =
     useState<ProductVariation | null>(null);
@@ -22,13 +23,22 @@ const Product: React.FC = () => {
   useEffect(() => {
     async function loadProduct() {
       try {
-        const productData = await fetchEntityById('Products', Number(id));
-        setProduct(productData);
-
+        const products: ProductType[] = await fetchEntities('Products', {
+          filter: {id: Number(id)},
+          isGetExtra: true,
+        });
+        setProduct(products[0])
         const variationsData = await fetchEntities('ProductVariations', {
           filter: { product_id: Number(id) },
+          isGetExtra: true,
         });
         setVariations(variationsData);
+
+        const categories = await fetchEntities('Categories', {
+          sort: ['name', 'ASC'],
+          filter: {id: products[0].category_id}
+        });
+        setCategory(categories[0]);
         if (variationsData && variationsData.length > 0) {
           setSelectedVariation(variationsData[0]);
         }
@@ -68,7 +78,7 @@ const Product: React.FC = () => {
       <Box className={styles.product__title}>{product.name}</Box>
       <Box className={styles.product__content}>
         <Box className={styles.content__left}>
-          <Carousel />
+          {product.images ? <Carousel images={product.images} /> : ''}
         </Box>
         <Box
           className={styles.content__right}
@@ -80,6 +90,7 @@ const Product: React.FC = () => {
             variations={variations}
             selectedVariation={selectedVariation}
             product={product}
+            category={category}
           />
         </Box>
       </Box>

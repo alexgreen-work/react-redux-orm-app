@@ -4,13 +4,14 @@ import styles from './ProductCard.module.scss';
 import { cx } from '@emotion/css';
 import { freeProductsIcon } from '../../../../icons';
 import StyledButton from '../../../StyledButton/StyledButton';
-import { Product, ProductVariation } from '../../../../types';
+import { Category, Product, ProductVariation } from '../../../../types';
 import colors from '/src/colors/baseColors.module.scss';
 
 interface ProductCardProps {
   variations: ProductVariation[];
   selectedVariation: ProductVariation | null;
   product: Product;
+  category?: Category | null;
   handleAddToCart: () => void;
   handleVariationChange: (variation: ProductVariation) => void;
 }
@@ -19,6 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   variations,
   selectedVariation,
   product,
+  category,
   handleAddToCart,
   handleVariationChange,
 }) => {
@@ -62,7 +64,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         за шт.
       </Box>
       <Box className={styles.card__category}>
-        Категория: {product.category_id}
+        Категория: {category?.name}
       </Box>
       <Box
         className={styles.card__variation}

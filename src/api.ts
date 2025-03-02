@@ -9,7 +9,7 @@ interface NewField {
   getBody?: (model: any) => any;
   key: string;
   id?: string;
-  extra?: NewField;
+  extra?: NewField[];
 }
 
 interface ExtraItem {
@@ -24,7 +24,7 @@ const extra: ExtraItem = {
   'Products': {
     newfield: {
       name: 'images',
-      url: (products: Product[]) => `/ProductImages`,
+      url: () => `/ProductImages`,
       getBody: (products: Product[]) => ({
         product_id: products.map((product) => product.id),
       }),
@@ -36,21 +36,32 @@ const extra: ExtraItem = {
   'ProductVariations': {
     newfield: {
       name: 'values',
-      url: (variations: ProductVariation[]) => `/ProductVariationPropertyValues`,
+      url: () => `/ProductVariationPropertyValues`,
       getBody: (variations: ProductVariation[]) => ({
         product_variation_id: variations.map((variation) => variation.id)
       }),
       key: 'product_variation_id',
       id: 'id',
-      extra: {
-        name: 'Properties',
-        url: (variationPropertiesValues: ProductVariationPropertyValues[]) => `/ProductVariationProperties`,
-        getBody: (variationPropertiesValues: ProductVariationPropertyValues[]) => ({
-          id: variationPropertiesValues.map((variationPropertiesValue) => variationPropertiesValue.product_variation_property_id)
-        }),
-        key: 'product_variation_property_id',
-        id: 'product_variation_property_id',
-      },
+      extra: [ 
+        {
+          name: 'Properties',
+          url: () => `/ProductVariationProperties`,
+          getBody: (variationPropertiesValues: ProductVariationPropertyValues[]) => ({
+            id: variationPropertiesValues.map((variationPropertiesValue) => variationPropertiesValue.product_variation_property_id)
+          }),
+          key: 'product_variation_property_id',
+          id: 'product_variation_property_id',
+        },
+        {
+          name: 'ValuesList',
+          url: () => `/ProductVariationPropertyListValues`,
+          getBody: (variationPropertiesValues: ProductVariationPropertyValues[]) => ({
+            id: variationPropertiesValues.map((variationPropertiesValue) => variationPropertiesValue.product_variation_property_list_value_id)
+          }),
+          key: 'product_variation_property_list_value_id',
+          id: 'product_variation_property_list_value_id',
+        }
+      ],
     },
     id: 'id',
     key: 'product_variation_id',
@@ -151,15 +162,12 @@ async function processExtraForData(
   for (const subItem of subData) {
     const parentKey = _.get(subItem, keyField);
     const value = parentMap[parentKey];
-    console.log({value, parentMap, parentKey, parentData, id, extraConf, keyField});
-    if(Array.isArray(value)){
-      for(let valueItem of value) {
-          if (!valueItem[extraConf.newfield.name]) {
-            valueItem[extraConf.newfield.name] = [];
-          } else{
-            console.log({valueItem, name: extraConf.newfield.name })
-          }
-          valueItem[extraConf.newfield.name].push(subItem);
+    if (Array.isArray(value)) {
+      for (let valueItem of value) {
+        if (!valueItem[extraConf.newfield.name]) {
+          valueItem[extraConf.newfield.name] = [];
+        }
+        valueItem[extraConf.newfield.name].push(subItem);
       }
     }
     if (parentMap[parentKey]) {
@@ -170,12 +178,13 @@ async function processExtraForData(
     }
   }
 
-  // Если есть вложенный extra, рекурсивно обрабатываем его
   if (extraConf.newfield.extra) {
     for (const parent of parentData) {
       const nestedData = parent[extraConf.newfield.name];
       if (nestedData && Array.isArray(nestedData)) {
-        await processExtraForData(nestedData, { newfield: extraConf.newfield.extra, key: 'id' });
+        for (const extraItem of extraConf.newfield.extra) {
+          await processExtraForData(nestedData, { newfield: extraItem, key: 'id' });
+        }
       }
     }
   }
@@ -193,15 +202,15 @@ export async function fetchEntities(
     filter?: object;
     sort?: [string, string];
     range?: [number, number];
+    isGetExtra?: boolean;
   }
 ): Promise<any[]> {
   let data = await getAllDataFromRequest(model, params);
 
-  if (extra[model]) {
+  if (extra[model] && params?.isGetExtra) {
     await processExtraForData(data, extra[model]);
   }
 
-  console.log({ data });
   return data;
 }
 

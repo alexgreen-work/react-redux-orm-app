@@ -5,5 +5,5 @@ export interface ProductListItem {
   name: string;
   category_id: number;
   minPrice: number | null;
-  image?: ProductImage;
+  images?: ProductImage[];
 }

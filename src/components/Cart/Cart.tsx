@@ -62,6 +62,7 @@ const Cart: React.FC = () => {
             filter: {
               product_id: [item.productId],
             },
+            isGetExtra: true,
           });
           dispatch({ type: 'data/loaded', payload: { variations: variation } });
         }
